@@ -78,6 +78,29 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;STEAMWORKS_WIN</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>2</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>default</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;STEAMWORKS_WIN</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>default</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework">
       <HintPath>Reference\Microsoft.Xna.Framework.dll</HintPath>
@@ -92,6 +115,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Steamworks.NET.dll</HintPath>
     </Reference>
+  <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553">
+    <HintPath>path\to\Microsoft.Xna.Framework.Game.dll</HintPath>
+    <Private>True</Private>
+  </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -1019,6 +1046,7 @@
     <None Include="app.config" />
     <None Include="global.json" />
     <None Include="Microsoft\Xna\Framework.RuntimeProfile" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -1037,4 +1065,11 @@
   <PropertyGroup>
     <PostBuildEvent>copy /d /y "$(ProjectDir)DLLs\*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="packages\MonoGame.Framework.Gtk.3.8.0.5\build\MonoGame.Framework.Gtk.targets" Condition="Exists('packages\MonoGame.Framework.Gtk.3.8.0.5\build\MonoGame.Framework.Gtk.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MonoGame.Framework.Gtk.3.8.0.5\build\MonoGame.Framework.Gtk.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MonoGame.Framework.Gtk.3.8.0.5\build\MonoGame.Framework.Gtk.targets'))" />
+  </Target>
 </Project>
