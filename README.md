@@ -104,7 +104,7 @@ We welcome contributors! See the [Contributing](#-contributing) section below fo
 ## 🎮 Features
 
 ### Core Features
-- **Unity 2021 LTS Compatible** — Full compatibility with Unity 2021.3.45f2 or later
+- **Unity 6 Compatible** — Full compatibility with Unity 6 (6000.0) or later
 - **Multi-Framework Support** — Maintains XNA, Monocle, MonoGame, and FNA compatibility
 - **Asset Pipeline** — Converts original Content to Unity Assets (Scenes, Sprites, Audio)
 - **Modular Architecture** — Clean separation between engine, gameplay, and Unity layers
@@ -127,7 +127,7 @@ We welcome contributors! See the [Contributing](#-contributing) section below fo
 
 | Requirement | Version |
 |-------------|---------|
-| Unity | 2021 LTS (2021.3.45f2+) |
+| Unity | 6 (6000.0+) |
 | .NET | Framework 4.8 or .NET 6+ |
 | FMOD | Required for audio |
 | Original Game | Required for assets |
@@ -147,7 +147,7 @@ We welcome contributors! See the [Contributing](#-contributing) section below fo
 2. **Open in Unity**
    - Launch Unity Hub
    - Click "Add" and select the cloned folder
-   - Open with Unity 2021 LTS
+   - Open with Unity 6
 
 3. **Install dependencies**
    - Open Package Manager (Window > Package Manager)
