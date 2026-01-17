@@ -1,20 +1,23 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using UnityEngine;
 
 namespace Monocle
 {
+    /// <summary>
+    /// Unity replacement for XNA VirtualRenderTarget.
+    /// Uses Unity's RenderTexture instead of XNA's RenderTarget2D.
+    /// </summary>
     public class VirtualRenderTarget : VirtualAsset
     {
-        public RenderTarget2D Target;
+        public RenderTexture Target;
         public int MultiSampleCount;
 
         public bool Depth { get; private set; }
 
         public bool Preserve { get; private set; }
 
-        public bool IsDisposed => Target == null || Target.IsDisposed || Target.GraphicsDevice.IsDisposed;
+        public bool IsDisposed => Target == null;
 
-        public Rectangle Bounds => Target.Bounds;
+        public Rect Bounds => new Rect(0, 0, Width, Height);
 
         internal VirtualRenderTarget(
             string name,
@@ -35,15 +38,25 @@ namespace Monocle
 
         internal override void Unload()
         {
-            if (Target == null || Target.IsDisposed)
+            if (Target == null)
                 return;
-            Target.Dispose();
+            Target.Release();
+            Object.Destroy(Target);
+            Target = null;
         }
 
         internal override void Reload()
         {
             Unload();
-            Target = new RenderTarget2D(Engine.Instance.GraphicsDevice, Width, Height, false, SurfaceFormat.Color, Depth ? DepthFormat.Depth24Stencil8 : DepthFormat.None, MultiSampleCount, Preserve ? RenderTargetUsage.PreserveContents : RenderTargetUsage.DiscardContents);
+            
+            // Create Unity RenderTexture
+            RenderTextureFormat format = RenderTextureFormat.ARGB32;
+            int depthBits = Depth ? 24 : 0;
+            
+            Target = new RenderTexture(Width, Height, depthBits, format);
+            Target.antiAliasing = MultiSampleCount > 1 ? MultiSampleCount : 1;
+            Target.name = Name;
+            Target.Create();
         }
 
         public override void Dispose()
@@ -53,6 +66,6 @@ namespace Monocle
             VirtualContent.Remove(this);
         }
 
-        public static implicit operator RenderTarget2D(VirtualRenderTarget target) => target.Target;
+        public static implicit operator RenderTexture(VirtualRenderTarget target) => target?.Target;
     }
 }

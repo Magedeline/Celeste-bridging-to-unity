@@ -1,84 +1,106 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using UnityEngine;
 
 namespace Monocle
 {
+    /// <summary>
+    /// Unity-adapted Draw class.
+    /// Original XNA SpriteBatch drawing is replaced with Unity's rendering system.
+    /// For actual rendering in Unity, use SpriteRenderers, LineRenderers, or Graphics.DrawMesh.
+    /// This class maintains API compatibility for Celeste code that calls these methods.
+    /// </summary>
     public static class Draw
     {
         public static MTexture Particle;
         public static MTexture Pixel;
-        private static Rectangle rect;
+        private static Microsoft.Xna.Framework.Rectangle rect;
 
         public static Renderer Renderer { get; internal set; }
 
+        // Stub SpriteBatch for compatibility - actual rendering should use Unity systems
         public static SpriteBatch SpriteBatch { get; private set; }
 
         public static SpriteFont DefaultFont { get; private set; }
 
-        internal static void Initialize(GraphicsDevice graphicsDevice)
+        // Unity-specific drawing helpers
+        private static Material _lineMaterial;
+        
+        internal static void Initialize()
         {
-            SpriteBatch = new SpriteBatch(graphicsDevice);
-            DefaultFont = Engine.Instance.Content.Load<SpriteFont>("Monocle\\MonocleDefault");
+            SpriteBatch = new SpriteBatch();
+            DefaultFont = new SpriteFont();
             UseDebugPixelTexture();
+            CreateLineMaterial();
+        }
+
+        private static void CreateLineMaterial()
+        {
+            if (_lineMaterial == null)
+            {
+                // Unity standard unlit shader for drawing
+                Shader shader = Shader.Find("Sprites/Default");
+                if (shader != null)
+                {
+                    _lineMaterial = new Material(shader);
+                    _lineMaterial.hideFlags = HideFlags.HideAndDontSave;
+                }
+            }
         }
 
         public static void UseDebugPixelTexture()
         {
-            MTexture parent = new(VirtualContent.CreateTexture("debug-pixel", 3, 3, Color.White));
+            MTexture parent = new(VirtualContent.CreateTexture("debug-pixel", 3, 3, Microsoft.Xna.Framework.Color.White));
             Pixel = new MTexture(parent, 1, 1, 1, 1);
             Particle = new MTexture(parent, 1, 1, 1, 1);
         }
 
-        public static void Point(Vector2 at, Color color) => SpriteBatch.Draw(Pixel.Texture.Texture, at, Draw.Pixel.ClipRect, color, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
+        // The following methods maintain API compatibility but rendering should be handled by Unity
+        // In a full port, these would draw using Unity's GL class, Graphics.DrawMesh, or LineRenderer
 
-        public static void Line(Vector2 start, Vector2 end, Color color) => LineAngle(start, Calc.Angle(start, end), Vector2.Distance(start, end), color);
-
-        public static void Line(Vector2 start, Vector2 end, Color color, float thickness) => LineAngle(start, Calc.Angle(start, end), Vector2.Distance(start, end), color, thickness);
-
-        public static void Line(float x1, float y1, float x2, float y2, Color color) => Line(new Vector2(x1, y1), new Vector2(x2, y2), color);
-
-        public static void Line(
-            float x1,
-            float y1,
-            float x2,
-            float y2,
-            Color color,
-            float thickness)
+        public static void Point(Microsoft.Xna.Framework.Vector2 at, Microsoft.Xna.Framework.Color color)
         {
-            Line(new Vector2(x1, y1), new Vector2(x2, y2), color, thickness);
+            // Unity: Use GL.Begin/GL.End or spawn a point particle
         }
 
-        public static void LineAngle(Vector2 start, float angle, float length, Color color) => SpriteBatch.Draw(Pixel.Texture.Texture, start, Draw.Pixel.ClipRect, color, angle, Vector2.Zero, new Vector2(length, 1f), SpriteEffects.None, 0.0f);
+        public static void Line(Microsoft.Xna.Framework.Vector2 start, Microsoft.Xna.Framework.Vector2 end, Microsoft.Xna.Framework.Color color) 
+            => LineAngle(start, Calc.Angle(start, end), Microsoft.Xna.Framework.Vector2.Distance(start, end), color);
 
-        public static void LineAngle(
-            Vector2 start,
-            float angle,
-            float length,
-            Color color,
-            float thickness)
+        public static void Line(Microsoft.Xna.Framework.Vector2 start, Microsoft.Xna.Framework.Vector2 end, Microsoft.Xna.Framework.Color color, float thickness) 
+            => LineAngle(start, Calc.Angle(start, end), Microsoft.Xna.Framework.Vector2.Distance(start, end), color, thickness);
+
+        public static void Line(float x1, float y1, float x2, float y2, Microsoft.Xna.Framework.Color color) 
+            => Line(new Microsoft.Xna.Framework.Vector2(x1, y1), new Microsoft.Xna.Framework.Vector2(x2, y2), color);
+
+        public static void Line(float x1, float y1, float x2, float y2, Microsoft.Xna.Framework.Color color, float thickness)
         {
-            SpriteBatch.Draw(Pixel.Texture.Texture, start, Draw.Pixel.ClipRect, color, angle, new Vector2(0.0f, 0.5f), new Vector2(length, thickness), SpriteEffects.None, 0.0f);
+            Line(new Microsoft.Xna.Framework.Vector2(x1, y1), new Microsoft.Xna.Framework.Vector2(x2, y2), color, thickness);
         }
 
-        public static void LineAngle(
-            float startX,
-            float startY,
-            float angle,
-            float length,
-            Color color)
+        public static void LineAngle(Microsoft.Xna.Framework.Vector2 start, float angle, float length, Microsoft.Xna.Framework.Color color)
         {
-            LineAngle(new Vector2(startX, startY), angle, length, color);
+            // Unity: Use GL.Begin(GL.LINES) or LineRenderer
         }
 
-        public static void Circle(Vector2 position, float radius, Color color, int resolution)
+        public static void LineAngle(Microsoft.Xna.Framework.Vector2 start, float angle, float length, Microsoft.Xna.Framework.Color color, float thickness)
         {
-            Vector2 vector1 = Vector2.UnitX * radius;
-            Vector2 vector2_1 = vector1.Perpendicular();
+            // Unity: Use GL.Begin(GL.QUADS) or LineRenderer with width
+        }
+
+        public static void LineAngle(float startX, float startY, float angle, float length, Microsoft.Xna.Framework.Color color)
+        {
+            LineAngle(new Microsoft.Xna.Framework.Vector2(startX, startY), angle, length, color);
+        }
+
+        public static void Circle(Microsoft.Xna.Framework.Vector2 position, float radius, Microsoft.Xna.Framework.Color color, int resolution)
+        {
+            Microsoft.Xna.Framework.Vector2 vector1 = Microsoft.Xna.Framework.Vector2.UnitX * radius;
+            Microsoft.Xna.Framework.Vector2 vector2_1 = vector1.Perpendicular();
             for (int index = 1; index <= resolution; ++index)
             {
-                Vector2 vector2 = Calc.AngleToVector(index * 1.57079637f / resolution, radius);
-                Vector2 vector2_2 = vector2.Perpendicular();
+                Microsoft.Xna.Framework.Vector2 vector2 = Calc.AngleToVector(index * 1.57079637f / resolution, radius);
+                Microsoft.Xna.Framework.Vector2 vector2_2 = vector2.Perpendicular();
                 Line(position + vector1, position + vector2, color);
                 Line(position - vector1, position - vector2, color);
                 Line(position + vector2_1, position + vector2_2, color);
@@ -88,21 +110,17 @@ namespace Monocle
             }
         }
 
-        public static void Circle(float x, float y, float radius, Color color, int resolution) => Circle(new Vector2(x, y), radius, color, resolution);
+        public static void Circle(float x, float y, float radius, Microsoft.Xna.Framework.Color color, int resolution) 
+            => Circle(new Microsoft.Xna.Framework.Vector2(x, y), radius, color, resolution);
 
-        public static void Circle(
-            Vector2 position,
-            float radius,
-            Color color,
-            float thickness,
-            int resolution)
+        public static void Circle(Microsoft.Xna.Framework.Vector2 position, float radius, Microsoft.Xna.Framework.Color color, float thickness, int resolution)
         {
-            Vector2 vector1 = Vector2.UnitX * radius;
-            Vector2 vector2_1 = vector1.Perpendicular();
+            Microsoft.Xna.Framework.Vector2 vector1 = Microsoft.Xna.Framework.Vector2.UnitX * radius;
+            Microsoft.Xna.Framework.Vector2 vector2_1 = vector1.Perpendicular();
             for (int index = 1; index <= resolution; ++index)
             {
-                Vector2 vector2 = Calc.AngleToVector(index * 1.57079637f / resolution, radius);
-                Vector2 vector2_2 = vector2.Perpendicular();
+                Microsoft.Xna.Framework.Vector2 vector2 = Calc.AngleToVector(index * 1.57079637f / resolution, radius);
+                Microsoft.Xna.Framework.Vector2 vector2_2 = vector2.Perpendicular();
                 Line(position + vector1, position + vector2, color, thickness);
                 Line(position - vector1, position - vector2, color, thickness);
                 Line(position + vector2_1, position + vector2_2, color, thickness);
@@ -112,308 +130,125 @@ namespace Monocle
             }
         }
 
-        public static void Circle(
-            float x,
-            float y,
-            float radius,
-            Color color,
-            float thickness,
-            int resolution)
+        public static void Circle(float x, float y, float radius, Microsoft.Xna.Framework.Color color, float thickness, int resolution)
         {
-            Circle(new Vector2(x, y), radius, color, thickness, resolution);
+            Circle(new Microsoft.Xna.Framework.Vector2(x, y), radius, color, thickness, resolution);
         }
 
-        public static void Rect(float x, float y, float width, float height, Color color)
+        public static void Rect(float x, float y, float width, float height, Microsoft.Xna.Framework.Color color)
         {
-            rect.X = (int) x;
-            rect.Y = (int) y;
-            rect.Width = (int) width;
-            rect.Height = (int) height;
-            SpriteBatch.Draw(Pixel.Texture.Texture, rect, Draw.Pixel.ClipRect, color);
+            // Unity: Use GL.Begin(GL.QUADS) or Graphics.DrawMesh with quad
         }
 
-        public static void Rect(Vector2 position, float width, float height, Color color) => Rect(position.X, position.Y, width, height, color);
+        public static void Rect(Microsoft.Xna.Framework.Vector2 position, float width, float height, Microsoft.Xna.Framework.Color color) 
+            => Rect(position.X, position.Y, width, height, color);
 
-        public static void Rect(Rectangle rect, Color color)
+        public static void Rect(Microsoft.Xna.Framework.Rectangle rect, Microsoft.Xna.Framework.Color color)
         {
-            rect = rect;
-            SpriteBatch.Draw(Pixel.Texture.Texture, rect, Draw.Pixel.ClipRect, color);
+            Rect(rect.X, rect.Y, rect.Width, rect.Height, color);
         }
 
-        public static void Rect(Collider collider, Color color) => Rect(collider.AbsoluteLeft, collider.AbsoluteTop, collider.Width, collider.Height, color);
+        public static void Rect(Collider collider, Microsoft.Xna.Framework.Color color) 
+            => Rect(collider.AbsoluteLeft, collider.AbsoluteTop, collider.Width, collider.Height, color);
 
-        public static void HollowRect(float x, float y, float width, float height, Color color)
+        public static void HollowRect(float x, float y, float width, float height, Microsoft.Xna.Framework.Color color)
         {
-            rect.X = (int) x;
-            rect.Y = (int) y;
-            rect.Width = (int) width;
-            rect.Height = 1;
-            SpriteBatch.Draw(Pixel.Texture.Texture, rect, Draw.Pixel.ClipRect, color);
-            rect.Y += (int) height - 1;
-            SpriteBatch.Draw(Pixel.Texture.Texture, rect, Draw.Pixel.ClipRect, color);
-            rect.Y -= (int) height - 1;
-            rect.Width = 1;
-            rect.Height = (int) height;
-            SpriteBatch.Draw(Pixel.Texture.Texture, rect, Draw.Pixel.ClipRect, color);
-            rect.X += (int) width - 1;
-            SpriteBatch.Draw(Pixel.Texture.Texture, rect, Draw.Pixel.ClipRect, color);
+            // Draw four lines to make a hollow rectangle
+            Line(x, y, x + width, y, color);
+            Line(x + width, y, x + width, y + height, color);
+            Line(x + width, y + height, x, y + height, color);
+            Line(x, y + height, x, y, color);
         }
 
-        public static void HollowRect(Vector2 position, float width, float height, Color color) => HollowRect(position.X, position.Y, width, height, color);
+        public static void HollowRect(Microsoft.Xna.Framework.Vector2 position, float width, float height, Microsoft.Xna.Framework.Color color) 
+            => HollowRect(position.X, position.Y, width, height, color);
 
-        public static void HollowRect(Rectangle rect, Color color) => HollowRect(rect.X, rect.Y, rect.Width, rect.Height, color);
+        public static void HollowRect(Microsoft.Xna.Framework.Rectangle rect, Microsoft.Xna.Framework.Color color) 
+            => HollowRect(rect.X, rect.Y, rect.Width, rect.Height, color);
 
-        public static void HollowRect(Collider collider, Color color) => HollowRect(collider.AbsoluteLeft, collider.AbsoluteTop, collider.Width, collider.Height, color);
+        public static void HollowRect(Collider collider, Microsoft.Xna.Framework.Color color) 
+            => HollowRect(collider.AbsoluteLeft, collider.AbsoluteTop, collider.Width, collider.Height, color);
 
-        public static void Text(SpriteFont font, string text, Vector2 position, Color color) => SpriteBatch.DrawString(font, text, position.Floor(), color);
-
-        public static void Text(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            Vector2 origin,
-            Vector2 scale,
-            float rotation)
+        public static void Text(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color)
         {
-            SpriteBatch.DrawString(font, text, position.Floor(), color, rotation, origin, scale, SpriteEffects.None, 0.0f);
+            // Unity: Use TextMeshPro or GUI.Label
         }
 
-        public static void TextJustified(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            Vector2 justify)
+        public static void Text(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, Microsoft.Xna.Framework.Vector2 origin, Microsoft.Xna.Framework.Vector2 scale, float rotation)
         {
-            Vector2 origin = font.MeasureString(text);
+            // Unity: Use TextMeshPro with transform
+        }
+
+        public static void TextJustified(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, Microsoft.Xna.Framework.Vector2 justify)
+        {
+            Microsoft.Xna.Framework.Vector2 origin = font.MeasureString(text);
             origin.X *= justify.X;
             origin.Y *= justify.Y;
-            SpriteBatch.DrawString(font, text, position.Floor(), color, 0.0f, origin, 1f, SpriteEffects.None, 0.0f);
+            Text(font, text, position - origin, color);
         }
 
-        public static void TextJustified(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            float scale,
-            Vector2 justify)
+        public static void TextJustified(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, float scale, Microsoft.Xna.Framework.Vector2 justify)
         {
-            Vector2 origin = font.MeasureString(text);
+            Microsoft.Xna.Framework.Vector2 origin = font.MeasureString(text);
             origin.X *= justify.X;
             origin.Y *= justify.Y;
-            SpriteBatch.DrawString(font, text, position.Floor(), color, 0.0f, origin, scale, SpriteEffects.None, 0.0f);
+            Text(font, text, position, color, origin, Microsoft.Xna.Framework.Vector2.One * scale, 0f);
         }
 
-        public static void TextCentered(SpriteFont font, string text, Vector2 position) => Text(font, text, position - font.MeasureString(text) * 0.5f, Color.White);
+        public static void TextCentered(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position) 
+            => Text(font, text, position - font.MeasureString(text) * 0.5f, Microsoft.Xna.Framework.Color.White);
 
-        public static void TextCentered(SpriteFont font, string text, Vector2 position, Color color) => Text(font, text, position - font.MeasureString(text) * 0.5f, color);
+        public static void TextCentered(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color) 
+            => Text(font, text, position - font.MeasureString(text) * 0.5f, color);
 
-        public static void TextCentered(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            float scale)
+        public static void TextCentered(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, float scale)
         {
-            Text(font, text, position, color, font.MeasureString(text) * 0.5f, Vector2.One * scale, 0.0f);
+            Text(font, text, position, color, font.MeasureString(text) * 0.5f, Microsoft.Xna.Framework.Vector2.One * scale, 0.0f);
         }
 
-        public static void TextCentered(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            float scale,
-            float rotation)
+        public static void TextCentered(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, float scale, float rotation)
         {
-            Text(font, text, position, color, font.MeasureString(text) * 0.5f, Vector2.One * scale, rotation);
+            Text(font, text, position, color, font.MeasureString(text) * 0.5f, Microsoft.Xna.Framework.Vector2.One * scale, rotation);
         }
 
-        public static void OutlineTextCentered(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            float scale)
+        public static void OutlineTextCentered(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, float scale)
         {
-            Vector2 origin = font.MeasureString(text) / 2f;
-            for (int x = -1; x < 2; ++x)
-            {
-                for (int y = -1; y < 2; ++y)
-                {
-                    if (x != 0 || y != 0)
-                        SpriteBatch.DrawString(font, text, position.Floor() + new Vector2(x, y), Color.Black, 0.0f, origin, scale, SpriteEffects.None, 0.0f);
-                }
-            }
-            SpriteBatch.DrawString(font, text, position.Floor(), color, 0.0f, origin, scale, SpriteEffects.None, 0.0f);
+            // Unity: Use TextMeshPro with outline settings
         }
 
-        public static void OutlineTextCentered(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            Color outlineColor)
+        public static void OutlineTextCentered(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, Microsoft.Xna.Framework.Color outlineColor)
         {
-            Vector2 origin = font.MeasureString(text) / 2f;
-            for (int x = -1; x < 2; ++x)
-            {
-                for (int y = -1; y < 2; ++y)
-                {
-                    if (x != 0 || y != 0)
-                        SpriteBatch.DrawString(font, text, position.Floor() + new Vector2(x, y), outlineColor, 0.0f, origin, 1f, SpriteEffects.None, 0.0f);
-                }
-            }
-            SpriteBatch.DrawString(font, text, position.Floor(), color, 0.0f, origin, 1f, SpriteEffects.None, 0.0f);
+            // Unity: Use TextMeshPro with outline settings
         }
 
-        public static void OutlineTextCentered(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            Color outlineColor,
-            float scale)
+        public static void OutlineTextCentered(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, Microsoft.Xna.Framework.Color outlineColor, float scale)
         {
-            Vector2 origin = font.MeasureString(text) / 2f;
-            for (int x = -1; x < 2; ++x)
-            {
-                for (int y = -1; y < 2; ++y)
-                {
-                    if (x != 0 || y != 0)
-                        SpriteBatch.DrawString(font, text, position.Floor() + new Vector2(x, y), outlineColor, 0.0f, origin, scale, SpriteEffects.None, 0.0f);
-                }
-            }
-            SpriteBatch.DrawString(font, text, position.Floor(), color, 0.0f, origin, scale, SpriteEffects.None, 0.0f);
+            // Unity: Use TextMeshPro with outline settings
         }
 
-        public static void OutlineTextJustify(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            Color outlineColor,
-            Vector2 justify)
+        public static void OutlineTextJustify(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, Microsoft.Xna.Framework.Color outlineColor, Microsoft.Xna.Framework.Vector2 justify)
         {
-            Vector2 origin = font.MeasureString(text) * justify;
-            for (int x = -1; x < 2; ++x)
-            {
-                for (int y = -1; y < 2; ++y)
-                {
-                    if (x != 0 || y != 0)
-                        SpriteBatch.DrawString(font, text, position.Floor() + new Vector2(x, y), outlineColor, 0.0f, origin, 1f, SpriteEffects.None, 0.0f);
-                }
-            }
-            SpriteBatch.DrawString(font, text, position.Floor(), color, 0.0f, origin, 1f, SpriteEffects.None, 0.0f);
+            // Unity: Use TextMeshPro with outline settings
         }
 
-        public static void OutlineTextJustify(
-            SpriteFont font,
-            string text,
-            Vector2 position,
-            Color color,
-            Color outlineColor,
-            Vector2 justify,
-            float scale)
+        public static void OutlineTextJustify(SpriteFont font, string text, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Color color, Microsoft.Xna.Framework.Color outlineColor, Microsoft.Xna.Framework.Vector2 justify, float scale)
         {
-            Vector2 origin = font.MeasureString(text) * justify;
-            for (int x = -1; x < 2; ++x)
-            {
-                for (int y = -1; y < 2; ++y)
-                {
-                    if (x != 0 || y != 0)
-                        SpriteBatch.DrawString(font, text, position.Floor() + new Vector2(x, y), outlineColor, 0.0f, origin, scale, SpriteEffects.None, 0.0f);
-                }
-            }
-            SpriteBatch.DrawString(font, text, position.Floor(), color, 0.0f, origin, scale, SpriteEffects.None, 0.0f);
+            // Unity: Use TextMeshPro with outline settings
         }
 
-        public static void SineTextureH(
-            MTexture tex,
-            Vector2 position,
-            Vector2 origin,
-            Vector2 scale,
-            float rotation,
-            Color color,
-            SpriteEffects effects,
-            float sineCounter,
-            float amplitude = 2f,
-            int sliceSize = 2,
-            float sliceAdd = 0.7853982f)
+        public static void SineTextureH(MTexture tex, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Vector2 origin, Microsoft.Xna.Framework.Vector2 scale, float rotation, Microsoft.Xna.Framework.Color color, SpriteEffects effects, float sineCounter, float amplitude = 2f, int sliceSize = 2, float sliceAdd = 0.7853982f)
         {
-            position = position.Floor();
-            Rectangle clipRect = tex.ClipRect with
-            {
-                Width = sliceSize
-            };
-            int num = 0;
-            for (; clipRect.X < tex.ClipRect.X + tex.ClipRect.Width; clipRect.Width = Math.Min(sliceSize, tex.ClipRect.X + tex.ClipRect.Width - clipRect.X))
-            {
-                Vector2 vector2 = new(sliceSize * num, (float) Math.Round(Math.Sin(sineCounter + (double) sliceAdd * num) * amplitude));
-                SpriteBatch.Draw(tex.Texture.Texture, position, clipRect, color, rotation, origin - vector2, scale, effects, 0.0f);
-                ++num;
-                clipRect.X += sliceSize;
-            }
+            // Unity: Use custom shader with sine wave distortion
         }
 
-        public static void SineTextureV(
-            MTexture tex,
-            Vector2 position,
-            Vector2 origin,
-            Vector2 scale,
-            float rotation,
-            Color color,
-            SpriteEffects effects,
-            float sineCounter,
-            float amplitude = 2f,
-            int sliceSize = 2,
-            float sliceAdd = 0.7853982f)
+        public static void SineTextureV(MTexture tex, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Vector2 origin, Microsoft.Xna.Framework.Vector2 scale, float rotation, Microsoft.Xna.Framework.Color color, SpriteEffects effects, float sineCounter, float amplitude = 2f, int sliceSize = 2, float sliceAdd = 0.7853982f)
         {
-            position = position.Floor();
-            Rectangle clipRect = tex.ClipRect with
-            {
-                Height = sliceSize
-            };
-            int num = 0;
-            for (; clipRect.Y < tex.ClipRect.Y + tex.ClipRect.Height; clipRect.Height = Math.Min(sliceSize, tex.ClipRect.Y + tex.ClipRect.Height - clipRect.Y))
-            {
-                Vector2 vector2 = new((float) Math.Round(Math.Sin(sineCounter + (double) sliceAdd * num) * amplitude), sliceSize * num);
-                SpriteBatch.Draw(tex.Texture.Texture, position, clipRect, color, rotation, origin - vector2, scale, effects, 0.0f);
-                ++num;
-                clipRect.Y += sliceSize;
-            }
+            // Unity: Use custom shader with sine wave distortion
         }
 
-        public static void TextureBannerV(
-            MTexture tex,
-            Vector2 position,
-            Vector2 origin,
-            Vector2 scale,
-            float rotation,
-            Color color,
-            SpriteEffects effects,
-            float sineCounter,
-            float amplitude = 2f,
-            int sliceSize = 2,
-            float sliceAdd = 0.7853982f)
+        public static void TextureBannerV(MTexture tex, Microsoft.Xna.Framework.Vector2 position, Microsoft.Xna.Framework.Vector2 origin, Microsoft.Xna.Framework.Vector2 scale, float rotation, Microsoft.Xna.Framework.Color color, SpriteEffects effects, float sineCounter, float amplitude = 2f, int sliceSize = 2, float sliceAdd = 0.7853982f)
         {
-            position = position.Floor();
-            Rectangle clipRect = tex.ClipRect with
-            {
-                Height = sliceSize
-            };
-            int num = 0;
-            for (; clipRect.Y < tex.ClipRect.Y + tex.ClipRect.Height; clipRect.Y += clipRect.Height)
-            {
-                float amount = (clipRect.Y - tex.ClipRect.Y) / (float) tex.ClipRect.Height;
-                clipRect.Height = (int) MathHelper.Lerp(sliceSize, 1f, amount);
-                clipRect.Height = Math.Min(sliceSize, tex.ClipRect.Y + tex.ClipRect.Height - clipRect.Y);
-                Vector2 vector2 = new((float) Math.Round(Math.Sin(sineCounter + (double) sliceAdd * num) * amplitude * amount), clipRect.Y - tex.ClipRect.Y);
-                SpriteBatch.Draw(tex.Texture.Texture, position, clipRect, color, rotation, origin - vector2, scale, effects, 0.0f);
-                ++num;
-            }
+            // Unity: Use custom shader with banner distortion
         }
     }
 }

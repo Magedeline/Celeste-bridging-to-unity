@@ -6,10 +6,16 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime;
+using UnityEngine;
 
 namespace Monocle
 {
-    public class Engine : Game
+    /// <summary>
+    /// Unity-adapted Engine class.
+    /// Original XNA Game class functionality is replaced with Unity MonoBehaviour patterns.
+    /// For Unity, this class acts as a compatibility layer - actual game loop is handled by Unity.
+    /// </summary>
+    public class Engine : IDisposable
     {
         public string Title;
         public Version Version;
@@ -24,12 +30,16 @@ namespace Monocle
         public static int FPS;
         private TimeSpan counterElapsed = TimeSpan.Zero;
         private int fpsCounter;
-        private static readonly string AssemblyDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        public static Color ClearColor;
+        private static string _contentDirectory;
+        public static Microsoft.Xna.Framework.Color ClearColor;
         public static bool ExitOnEscapeKeypress;
         private Scene scene;
         private Scene nextScene;
-        public static Matrix ScreenMatrix;
+        public static Microsoft.Xna.Framework.Matrix ScreenMatrix;
+
+        // Unity-specific
+        private bool _isInitialized;
+        private float _lastUpdateTime;
 
         public static Engine Instance { get; private set; }
 
@@ -53,7 +63,7 @@ namespace Monocle
             set
             {
                 viewPadding = value;
-                Instance.UpdateView();
+                Instance?.UpdateView();
             }
         }
 
@@ -66,7 +76,33 @@ namespace Monocle
         /// <summary>
         /// Absolute content directory path.
         /// </summary>
-        public static string ContentDirectory => Path.Combine(AssemblyDirectory, Instance.Content.RootDirectory);
+        public static string ContentDirectory
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_contentDirectory))
+                {
+                    // In Unity, use Application.streamingAssetsPath or a custom path
+                    _contentDirectory = Path.Combine(UnityEngine.Application.streamingAssetsPath, "Content");
+                    if (!Directory.Exists(_contentDirectory))
+                    {
+                        _contentDirectory = Path.Combine(UnityEngine.Application.dataPath, "Content");
+                    }
+                }
+                return _contentDirectory;
+            }
+            set => _contentDirectory = value;
+        }
+
+        // Stub Content manager for compatibility
+        public ContentManager Content { get; private set; }
+
+        // Stub GraphicsDevice for compatibility
+        public GraphicsDevice GraphicsDevice { get; private set; }
+
+        // Stub window properties
+        public bool IsMouseVisible { get; set; }
+        public TimeSpan InactiveSleepTime { get; set; }
 
         public Engine(
             int width,
@@ -78,118 +114,74 @@ namespace Monocle
             bool vsync)
         {
             Instance = this;
-            Title = Window.Title = windowTitle;
+            Title = windowTitle;
             Width = width;
             Height = height;
-            ClearColor = Color.Black;
+            ViewWidth = windowWidth;
+            ViewHeight = windowHeight;
+            ClearColor = Microsoft.Xna.Framework.Color.Black;
             InactiveSleepTime = new TimeSpan(0L);
+            
+            // Initialize stub graphics
             Graphics = new GraphicsDeviceManager(this);
-            Graphics.DeviceReset += OnGraphicsReset;
-            Graphics.DeviceCreated += OnGraphicsCreate;
-            Graphics.SynchronizeWithVerticalRetrace = vsync;
-            Graphics.PreferMultiSampling = false;
-            Graphics.GraphicsProfile = GraphicsProfile.HiDef;
-            Graphics.PreferredBackBufferFormat = SurfaceFormat.Color;
-            Graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
-            Window.AllowUserResizing = true;
-            Window.ClientSizeChanged += OnClientSizeChanged;
-            if (fullscreen)
-            {
-                Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-                Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                Graphics.IsFullScreen = true;
-            }
-            else
-            {
-                Graphics.PreferredBackBufferWidth = windowWidth;
-                Graphics.PreferredBackBufferHeight = windowHeight;
-                Graphics.IsFullScreen = false;
-            }
-            Content.RootDirectory = "Content";
-            IsMouseVisible = false;
-            ExitOnEscapeKeypress = true;
+            GraphicsDevice = Graphics.GraphicsDevice;
+            Content = new ContentManager(null);
+            
             GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
         }
 
-        protected virtual void OnClientSizeChanged(object sender, EventArgs e)
+        // Default constructor for Unity initialization
+        public Engine() : this(320, 180, 1920, 1080, "Celeste", false, true)
         {
-            if (Window.ClientBounds.Width <= 0 || Window.ClientBounds.Height <= 0 || resizing)
-                return;
-            resizing = true;
-            Graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
-            Graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
-            UpdateView();
-            resizing = false;
         }
 
-        protected virtual void OnGraphicsReset(object sender, EventArgs e)
+        /// <summary>
+        /// Initialize the engine. Call this from Unity's Awake or Start.
+        /// </summary>
+        public virtual void Initialize()
         {
-            UpdateView();
-            scene?.HandleGraphicsReset();
-            if (nextScene == null || nextScene == scene)
-                return;
-            nextScene.HandleGraphicsReset();
-        }
-
-        protected virtual void OnGraphicsCreate(object sender, EventArgs e)
-        {
-            UpdateView();
-            scene?.HandleGraphicsCreate();
-            if (nextScene == null || nextScene == scene)
-                return;
-            nextScene.HandleGraphicsCreate();
-        }
-
-        protected override void OnActivated(object sender, EventArgs args)
-        {
-            base.OnActivated(sender, args);
-            if (scene == null)
-                return;
-            scene.GainFocus();
-        }
-
-        protected override void OnDeactivated(object sender, EventArgs args)
-        {
-            base.OnDeactivated(sender, args);
-            if (scene == null)
-                return;
-            scene.LoseFocus();
-        }
-
-        protected override void Initialize()
-        {
-            base.Initialize();
+            if (_isInitialized) return;
+            
             MInput.Initialize();
             Tracker.Initialize();
             Pooler = new Pooler();
             Commands = new Commands();
+            
+            _isInitialized = true;
         }
 
-        protected override void LoadContent()
+        /// <summary>
+        /// Load content. Call after Initialize.
+        /// </summary>
+        public virtual void LoadContent()
         {
-            base.LoadContent();
             VirtualContent.Reload();
-            Monocle.Draw.Initialize(GraphicsDevice);
+            Monocle.Draw.Initialize();
         }
 
-        protected override void UnloadContent()
+        /// <summary>
+        /// Unload content.
+        /// </summary>
+        public virtual void UnloadContent()
         {
-            base.UnloadContent();
             VirtualContent.Unload();
         }
 
-        protected override void Update(GameTime gameTime)
+        /// <summary>
+        /// Update the engine. Call from Unity's Update.
+        /// </summary>
+        /// <param name="deltaTime">Time since last frame (typically Time.deltaTime)</param>
+        public virtual void Update(float deltaTime)
         {
-            RawDeltaTime = (float) gameTime.ElapsedGameTime.TotalSeconds;
+            RawDeltaTime = deltaTime;
             DeltaTime = RawDeltaTime * TimeRate * TimeRateB;
             ++FrameCounter;
+            
             MInput.Update();
-            if (ExitOnEscapeKeypress && MInput.Keyboard.Pressed(Keys.Escape))
-                Exit();
-            else if (OverloadGameLoop != null)
+            
+            if (OverloadGameLoop != null)
             {
                 OverloadGameLoop();
-                base.Update(gameTime);
             }
             else
             {
@@ -202,14 +194,15 @@ namespace Monocle
                         if (scene != null)
                         {
                             scene.Tracker.GetEntity<PlayerDashAssist>()?.Update();
-                            if (scene is Level)
-                                (scene as Level).UpdateTime();
+                            if (scene is Level level)
+                                level.UpdateTime();
                             scene.Entities.UpdateLists();
                         }
                     }
                     else
                         DashAssistFreeze = false;
                 }
+                
                 if (!DashAssistFreeze)
                 {
                     if (FreezeTimer > 0.0)
@@ -221,67 +214,52 @@ namespace Monocle
                         scene.AfterUpdate();
                     }
                 }
+                
                 if (Commands.Open)
                     Commands.UpdateOpen();
                 else if (Commands.Enabled)
                     Commands.UpdateClosed();
+                
                 if (scene != nextScene)
                 {
-                    Scene scene = this.scene;
-                    this.scene?.End();
-                    this.scene = nextScene;
-                    OnSceneTransition(scene, nextScene);
-                    this.scene?.Begin();
+                    Scene oldScene = scene;
+                    scene?.End();
+                    scene = nextScene;
+                    OnSceneTransition(oldScene, nextScene);
+                    scene?.Begin();
                 }
-                base.Update(gameTime);
+            }
+            
+            // FPS counter
+            ++fpsCounter;
+            counterElapsed += TimeSpan.FromSeconds(deltaTime);
+            if (counterElapsed >= TimeSpan.FromSeconds(1.0))
+            {
+                FPS = fpsCounter;
+                fpsCounter = 0;
+                counterElapsed -= TimeSpan.FromSeconds(1.0);
             }
         }
 
-        protected override void Draw(GameTime gameTime)
-        {
-            RenderCore();
-            base.Draw(gameTime);
-            if (Commands.Open)
-                Commands.Render();
-            ++fpsCounter;
-            counterElapsed += gameTime.ElapsedGameTime;
-            if (!(counterElapsed >= TimeSpan.FromSeconds(1.0)))
-                return;
-            FPS = fpsCounter;
-            fpsCounter = 0;
-            counterElapsed -= TimeSpan.FromSeconds(1.0);
-        }
-
-        protected virtual void RenderCore()
+        /// <summary>
+        /// Render the scene. In Unity, this is typically handled by Unity's rendering.
+        /// This method maintains compatibility for code that calls it.
+        /// </summary>
+        public virtual void Render()
         {
             scene?.BeforeRender();
-            GraphicsDevice.SetRenderTarget(null);
-            GraphicsDevice.Viewport = Viewport;
-            GraphicsDevice.Clear(ClearColor);
-            if (scene == null)
-                return;
-            scene.Render();
-            scene.AfterRender();
-        }
-
-        protected override void OnExiting(object sender, EventArgs args)
-        {
-            base.OnExiting(sender, args);
-            MInput.Shutdown();
-        }
-
-        public void RunWithLogging()
-        {
-            try
+            
+            // In Unity, actual rendering is done by the Unity camera/renderer
+            // This is kept for API compatibility
+            
+            if (scene != null)
             {
-                Run();
+                scene.Render();
+                scene.AfterRender();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                ErrorLog.Write(ex);
-                ErrorLog.Open();
-            }
+            
+            if (Commands.Open)
+                Commands.Render();
         }
 
         protected virtual void OnSceneTransition(Scene from, Scene to)
@@ -294,8 +272,12 @@ namespace Monocle
 
         public static Scene Scene
         {
-            get => Instance.scene;
-            set => Instance.nextScene = value;
+            get => Instance?.scene;
+            set
+            {
+                if (Instance != null)
+                    Instance.nextScene = value;
+            }
         }
 
         public static Viewport Viewport { get; private set; }
@@ -304,48 +286,50 @@ namespace Monocle
         {
             if (width <= 0 || height <= 0)
                 return;
-            resizing = true;
-            Graphics.PreferredBackBufferWidth = width;
-            Graphics.PreferredBackBufferHeight = height;
-            Graphics.IsFullScreen = false;
-            Graphics.ApplyChanges();
-            Console.WriteLine("WINDOW-" + width + "x" + height);
-            resizing = false;
+            
+            // In Unity, use Screen.SetResolution
+            UnityEngine.Screen.SetResolution(width, height, false);
+            ViewWidth = width;
+            ViewHeight = height;
+            Instance?.UpdateView();
         }
 
         public static void SetFullscreen()
         {
-            resizing = true;
-            Graphics.PreferredBackBufferWidth = Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
-            Graphics.PreferredBackBufferHeight = Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
-            Graphics.IsFullScreen = true;
-            Graphics.ApplyChanges();
-            Console.WriteLine("FULLSCREEN");
-            resizing = false;
+            // In Unity, use Screen.SetResolution with fullscreen
+            UnityEngine.Screen.SetResolution(
+                UnityEngine.Screen.currentResolution.width,
+                UnityEngine.Screen.currentResolution.height,
+                true);
+            Instance?.UpdateView();
         }
 
         private void UpdateView()
         {
-            float backBufferWidth = GraphicsDevice.PresentationParameters.BackBufferWidth;
-            float backBufferHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
-            if ((double) backBufferWidth / Width > (double) backBufferHeight / Height)
+            float backBufferWidth = UnityEngine.Screen.width;
+            float backBufferHeight = UnityEngine.Screen.height;
+            
+            if ((double)backBufferWidth / Width > (double)backBufferHeight / Height)
             {
-                ViewWidth = (int) ((double) backBufferHeight / Height * Width);
-                ViewHeight = (int) backBufferHeight;
+                ViewWidth = (int)((double)backBufferHeight / Height * Width);
+                ViewHeight = (int)backBufferHeight;
             }
             else
             {
-                ViewWidth = (int) backBufferWidth;
-                ViewHeight = (int) ((double) backBufferWidth / Width * Height);
+                ViewWidth = (int)backBufferWidth;
+                ViewHeight = (int)((double)backBufferWidth / Width * Height);
             }
-            float num = ViewHeight / (float) ViewWidth;
+            
+            float num = ViewHeight / (float)ViewWidth;
             ViewWidth -= ViewPadding * 2;
-            ViewHeight -= (int) ((double) num * ViewPadding * 2.0);
-            ScreenMatrix = Matrix.CreateScale(ViewWidth / (float) Width);
+            ViewHeight -= (int)((double)num * ViewPadding * 2.0);
+            
+            ScreenMatrix = Microsoft.Xna.Framework.Matrix.CreateScale(ViewWidth / (float)Width);
+            
             Viewport = new Viewport
             {
-                X = (int) (backBufferWidth / 2.0 - ViewWidth / 2),
-                Y = (int) (backBufferHeight / 2.0 - ViewHeight / 2),
+                X = (int)(backBufferWidth / 2.0 - ViewWidth / 2),
+                Y = (int)(backBufferHeight / 2.0 - ViewHeight / 2),
                 Width = ViewWidth,
                 Height = ViewHeight,
                 MinDepth = 0.0f,
@@ -354,5 +338,89 @@ namespace Monocle
         }
 
         public static void ReloadGraphics(bool hires) { }
+
+        public void Dispose()
+        {
+            UnloadContent();
+            MInput.Shutdown();
+        }
+
+        // Stub methods for XNA Game compatibility
+        public void Exit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            UnityEngine.Application.Quit();
+#endif
+        }
+
+        public void Run() { }
+        public void RunWithLogging() { }
+
+        // Events for graphics device (stubs for compatibility)
+        public event EventHandler<EventArgs> Activated;
+        public event EventHandler<EventArgs> Deactivated;
+
+        public void OnActivated()
+        {
+            scene?.GainFocus();
+            Activated?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnDeactivated()
+        {
+            scene?.LoseFocus();
+            Deactivated?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    // Stub for XNA Game class that Engine used to inherit from
+    public abstract class Game : IDisposable
+    {
+        public ContentManager Content { get; protected set; }
+        public GameWindow Window { get; protected set; }
+        public GraphicsDevice GraphicsDevice { get; protected set; }
+        public bool IsMouseVisible { get; set; }
+        public TimeSpan InactiveSleepTime { get; set; }
+
+        protected virtual void Initialize() { }
+        protected virtual void LoadContent() { }
+        protected virtual void UnloadContent() { }
+        protected virtual void Update(GameTime gameTime) { }
+        protected virtual void Draw(GameTime gameTime) { }
+        protected virtual void OnActivated(object sender, EventArgs args) { }
+        protected virtual void OnDeactivated(object sender, EventArgs args) { }
+        protected virtual void OnExiting(object sender, EventArgs args) { }
+
+        public void Run() { }
+        public void Exit() { }
+        public virtual void Dispose() { }
+    }
+
+    // Stub for XNA GameWindow
+    public class GameWindow
+    {
+        public string Title { get; set; }
+        public bool AllowUserResizing { get; set; }
+        public Microsoft.Xna.Framework.Rectangle ClientBounds => new Microsoft.Xna.Framework.Rectangle(0, 0, UnityEngine.Screen.width, UnityEngine.Screen.height);
+        public event EventHandler<EventArgs> ClientSizeChanged;
+    }
+
+    // Stub for XNA ContentManager (kept here for proximity to Engine)
+    public class ContentManager : IDisposable
+    {
+        public string RootDirectory { get; set; } = "Content";
+
+        public ContentManager(IServiceProvider serviceProvider) { }
+
+        public T Load<T>(string assetName)
+        {
+            // In Unity, use Resources.Load or Addressables
+            return default;
+        }
+
+        public void Unload() { }
+        public void Dispose() { }
     }
 }
