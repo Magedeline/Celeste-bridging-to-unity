@@ -11,6 +11,7 @@
 <p align="center">
   <a href="#-introduction">Introduction</a> •
   <a href="#-disclaimer">Disclaimer</a> •
+  <a href="#-merged-repositories">Merged Repos</a> •
   <a href="#-team--tasks">Team & Tasks</a> •
   <a href="#-features">Features</a> •
   <a href="#-getting-started">Getting Started</a> •
@@ -29,6 +30,56 @@ The goal of this project is threefold:
 3. **Modding:** Enable new modding possibilities through Unity's ecosystem and tooling
 
 This is a passion project born from deep appreciation for the original game's design and the desire to explore its systems in a different engine context.
+
+---
+
+## 🔀 Merged Repositories
+
+This project is a merge of multiple Celeste-related Unity projects, combining their strengths:
+
+### Source Repositories
+
+| Repository | Description | Contributors | Status |
+|------------|-------------|--------------|--------|
+| **[BloodLantern/Celeste](https://github.com/BloodLantern/Celeste)** | Original XNA/Monocle decompilation with Unity compatibility layer | BloodLantern | Upstream |
+| **[Magedeline/Celeste-bridging-to-unity](https://github.com/Magedeline/Celeste-bridging-to-unity)** | Unity Bridge integration project | Gabriel L | Origin |
+| **[AdamNbz/celeste-2d-pc-version](https://github.com/AdamNbz/celeste-2d-pc-version)** | Celeste 2D Lite - PC reimplementation | AdamNbz, duongthuan0405, DSeaNguyen, Piltoverian | Merged |
+
+### Merge Details
+
+**Merge Date:** January 18, 2026  
+**Merge Branch:** `merge-celeste-2d-pc`  
+**Base Branch:** `master`
+
+#### What was merged from celeste-2d-pc-version:
+
+| Component | Description |
+|-----------|-------------|
+| **Assets/Scripts/** | Player mechanics, movement systems, state machines |
+| **Assets/Sprites/** | Character sprites, tilesets, UI elements |
+| **Assets/Scenes/** | Chapter levels, menus |
+| **Assets/Audio/** | FMOD audio assets |
+| **Assets/Animations/** | Character animation controllers |
+| **Assets/Prefabs/** | Game objects and entities |
+| **save/** | Save system data |
+
+#### Conflict Resolution Strategy:
+
+| File Type | Resolution | Reason |
+|-----------|------------|--------|
+| `ProjectSettings/*` | **Kept ours** | Preserve original Unity project configuration |
+| `.gitignore` | **Kept ours** | More comprehensive ignore rules |
+| `.vscode/settings.json` | **Kept ours** | Development environment preferences |
+| `README.md` | **Merged** | Combined documentation from both projects |
+
+### Remote Configuration
+
+```bash
+# Current git remotes after merge:
+origin      https://github.com/Magedeline/Celeste-bridging-to-unity.git  # Your fork
+upstream    https://github.com/BloodLantern/Celeste.git                  # Original decompilation
+celeste-2d  https://github.com/AdamNbz/celeste-2d-pc-version.git         # Merged repository
+```
 
 ---
 
@@ -61,6 +112,18 @@ This is an **unofficial**, **fan-made**, community-driven port created purely fo
 
 ## 👥 Team & Tasks
 
+### Project Contributors
+
+#### Celeste Bridge Team
+- **BloodLantern** — Original decompilation and Monocle engine port
+- **Gabriel L** — Unity bridge integration and project maintenance
+
+#### Celeste 2D Lite Team (Merged)
+- **[@AdamNbz](https://github.com/AdamNbz)** — Lead developer
+- **[@duongthuan0405](https://github.com/duongthuan0405)** — Developer
+- **[@DSeaNguyen](https://github.com/DSeaNguyen)** — Developer
+- **[@Piltoverian](https://github.com/Piltoverian)** — Developer
+
 ### Project Structure
 
 This project is organized into several key areas, each with specific goals and responsibilities:
@@ -68,11 +131,11 @@ This project is organized into several key areas, each with specific goals and r
 | Area | Description | Status |
 |------|-------------|--------|
 | **Core Engine** | Monocle engine port and Unity integration | 🔄 In Progress |
-| **Gameplay Systems** | Player mechanics, entities, collision | 🔄 In Progress |
+| **Gameplay Systems** | Player mechanics, entities, collision | ✅ Partially Complete |
 | **Rendering** | Graphics pipeline, shaders, effects | 🔄 In Progress |
-| **Audio** | FMOD integration, music, sound effects | 📋 Planned |
+| **Audio** | FMOD integration, music, sound effects | ✅ FMOD Assets Added |
 | **Level Loading** | Map parsing, room transitions | 🔄 In Progress |
-| **UI/Menus** | Menu systems, HUD, overlays | 📋 Planned |
+| **UI/Menus** | Menu systems, HUD, overlays | 🔄 In Progress |
 | **Modding Support** | Everest compatibility, BepInEx | 📋 Planned |
 
 ### Task Priorities
@@ -115,6 +178,14 @@ We welcome contributors! See the [Contributing](#-contributing) section below fo
 - **Advanced Camera** — Celeste-style camera with look-ahead and smoothing
 - **Tweening System** — High-performance animation and interpolation
 
+### From Celeste 2D Lite (Merged)
+- **Player State Machine** — Complete player movement implementation
+- **Wall Climbing** — Full wall climb mechanics
+- **Dashing** — Dash system with directional control
+- **Sprite Assets** — Tileset and character sprites
+- **FMOD Audio** — Audio assets integration
+- **Chapter 1 Content** — Initial level content
+
 ### Planned Features
 - **3D Overworld** — Mountain, bird, moon, building, and heart 3D models
 - **Framework Conversion** — Automatic conversion between Monocle/XNA and Unity
@@ -140,8 +211,8 @@ We welcome contributors! See the [Contributing](#-contributing) section below fo
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/BloodLantern/Celeste.git
-   cd Celeste
+   git clone https://github.com/Magedeline/Celeste-bridging-to-unity.git
+   cd Celeste-bridging-to-unity
    ```
 
 2. **Open in Unity**
@@ -162,6 +233,22 @@ We welcome contributors! See the [Contributing](#-contributing) section below fo
    - Copy Content folder to project
 
 6. **Build and run**
+
+### Working with Git Remotes
+
+```bash
+# Fetch updates from all remotes
+git fetch --all
+
+# Pull latest from your origin
+git pull origin master
+
+# Pull updates from upstream (BloodLantern/Celeste)
+git pull upstream master
+
+# Pull updates from celeste-2d-pc-version
+git pull celeste-2d main
+```
 
 ---
 
@@ -217,6 +304,11 @@ Please ensure all changes maintain compatibility with the original frameworks.
 - **No original game assets** are included in this repository
 - Users must **own the original game** to use any Celeste assets
 - Please **support the original developers** by purchasing the game
+
+### Licenses
+
+- **Celeste Bridge** — See LICENSE file
+- **Celeste 2D Lite** — MIT License
 
 ### Support the Developers
 
