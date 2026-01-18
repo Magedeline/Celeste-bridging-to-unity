@@ -1,0 +1,20 @@
+{
+    "name": "Celeste.Runtime",
+    "rootNamespace": "Celeste",
+    "references": [
+        "Monocle.Runtime",
+        "SimplexNoise.Runtime",
+        "Unity.InputSystem",
+        "FMODUnity",
+        "FMODUnityResonance"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

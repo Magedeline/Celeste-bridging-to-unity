@@ -1,0 +1,20 @@
+{
+    "name": "Celeste.Unity.Editor",
+    "rootNamespace": "Celeste.Editor",
+    "references": [
+        "Celeste.Runtime",
+        "Monocle.Runtime",
+        "Celeste.Unity"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
