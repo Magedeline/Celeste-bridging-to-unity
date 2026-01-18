@@ -1,4 +1,4 @@
-﻿using FMOD.Studio;
+using FMOD.Studio;
 using Monocle;
 
 namespace Celeste
@@ -79,7 +79,7 @@ namespace Celeste
             base.Update();
             if (isLevelMusic)
                 sfx = Audio.CurrentMusicEventInstance;
-            if (sfx == null && !isLevelMusic)
+            if (!sfx.isValid() && !isLevelMusic)
             {
                 sfx = Audio.CreateInstance(AreaData.Areas[SceneAs<Level>().Session.Area.ID].CassetteSong);
                 Audio.Play("event:/game/general/cassette_block_switch_2");
@@ -124,7 +124,7 @@ namespace Celeste
             }
             if (leadBeats > 0)
                 return;
-            int num1 = (int) sfx.setParameterValue("sixteenth_note", GetSixteenthNote());
+            int num1 = (int)sfx.setParameterByName("sixteenth_note", GetSixteenthNote());
         }
 
         public int GetSixteenthNote() => (beatIndex + beatIndexOffset) % 256 + 1;

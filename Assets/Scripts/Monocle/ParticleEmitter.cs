@@ -70,10 +70,11 @@ namespace Monocle
                 {
                     Particle particle = new Particle();
                     Vector2 position = Entity.Position + Position + Calc.Random.Range(-Range, Range);
-                    particle = (!Direction.HasValue ? Type.Create(ref particle, position) : Type.Create(ref particle, position, Direction.Value)) with
-                    {
-                        Track = Track
-                    };
+                    Particle created = !Direction.HasValue
+                        ? Type.Create(ref particle, position)
+                        : Type.Create(ref particle, position, Direction.Value);
+                    created.Track = Track;
+                    particle = created;
                     float duration1 = duration - Interval * index1;
                     if (particle.SimulateFor(duration1))
                         System.Add(particle);

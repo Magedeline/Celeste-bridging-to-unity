@@ -1,4 +1,3 @@
-﻿using Celeste;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -104,6 +103,13 @@ namespace Monocle
         public bool IsMouseVisible { get; set; }
         public TimeSpan InactiveSleepTime { get; set; }
 
+        public bool IsActive => UnityEngine.Application.isFocused;
+
+        // Approximation of XNA fixed timestep; used by some simulation helpers.
+        public TimeSpan TargetElapsedTime { get; set; } = TimeSpan.FromSeconds(1.0 / 60.0);
+
+        public GameWindow Window { get; } = new GameWindow();
+
         public Engine(
             int width,
             int height,
@@ -185,6 +191,7 @@ namespace Monocle
             }
             else
             {
+                #if CELESTE
                 if (DashAssistFreeze)
                 {
                     if (Input.Dash.Check || !DashAssistFreezePress)
@@ -202,6 +209,12 @@ namespace Monocle
                     else
                         DashAssistFreeze = false;
                 }
+                #else
+                if (DashAssistFreeze)
+                {
+                    DashAssistFreeze = false;
+                }
+                #endif
                 
                 if (!DashAssistFreeze)
                 {

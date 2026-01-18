@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Monocle
 {
@@ -67,5 +68,8 @@ namespace Monocle
         }
 
         public static implicit operator RenderTexture(VirtualRenderTarget target) => target?.Target;
+
+        public static implicit operator RenderTarget2D(VirtualRenderTarget target)
+            => target == null ? null : new RenderTarget2D(target.Target);
     }
 }

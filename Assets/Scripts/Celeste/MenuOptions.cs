@@ -12,7 +12,7 @@ namespace Celeste
         private static TextMenu.Item viewport;
         private static EventInstance snapshot;
 
-        public static TextMenu Create(bool inGame = false, EventInstance snapshot = null)
+        public static TextMenu Create(bool inGame = false, EventInstance snapshot = default)
         {
             MenuOptions.inGame = inGame;
             MenuOptions.snapshot = snapshot;
@@ -192,14 +192,14 @@ namespace Celeste
 
         private static void EnterSound()
         {
-            if (!MenuOptions.inGame || !(MenuOptions.snapshot != null))
+            if (!MenuOptions.inGame || !MenuOptions.snapshot.isValid())
                 return;
             Audio.EndSnapshot(MenuOptions.snapshot);
         }
 
         private static void LeaveSound()
         {
-            if (!MenuOptions.inGame || !(MenuOptions.snapshot != null))
+            if (!MenuOptions.inGame || !MenuOptions.snapshot.isValid())
                 return;
             Audio.ResumeSnapshot(MenuOptions.snapshot);
         }

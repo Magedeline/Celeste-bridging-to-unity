@@ -54,7 +54,7 @@ namespace Celeste
                 yield return null;
             }
             cs00Ending.bird.Position = to;
-            instance = null;
+            instance = default;
             from = new Vector2();
             to = new Vector2();
             Audio.Play("event:/game/general/bird_land_dirt", cs00Ending.bird.Position);

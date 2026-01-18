@@ -1,16 +1,14 @@
-﻿using System;
+using System;
 
-namespace FMOD.Studio
+namespace FMOD
 {
-    public abstract class HandleBase
+    public class HandleBase
     {
         protected IntPtr rawPtr;
 
         public HandleBase(IntPtr newPtr) => this.rawPtr = newPtr;
 
-        public bool isValid() => this.rawPtr != IntPtr.Zero && this.isValidInternal();
-
-        protected abstract bool isValidInternal();
+        public bool isValid() => this.rawPtr != IntPtr.Zero;
 
         public IntPtr getRaw() => this.rawPtr;
 

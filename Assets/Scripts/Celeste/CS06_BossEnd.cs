@@ -152,7 +152,7 @@ namespace Celeste
 
         public override void OnEnd(Level level)
         {
-            if (WasSkipped && sfx != null)
+            if (WasSkipped && sfx.isValid())
                 Audio.Stop(sfx);
             Audio.SetParameter(Audio.CurrentAmbienceEventInstance, "postboss", 0.0f);
             level.ResetZoom();

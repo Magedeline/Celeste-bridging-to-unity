@@ -96,7 +96,7 @@ namespace Celeste
                         {
                             signSfx.Play("event:/new_content/env/local/cafe_sign");
                             Audio.ReleaseSnapshot(snapshot);
-                            snapshot = null;
+                            snapshot = default;
                         }
                     }
                 }
@@ -122,7 +122,7 @@ namespace Celeste
             if (inCutscene)
                 return;
             Level scene = Scene as Level;
-            if (usingSfx != null)
+            if (usingSfx.isValid())
             {
                 Audio.SetParameter(usingSfx, "end", 1f);
                 Audio.Stop(usingSfx);
@@ -161,7 +161,7 @@ namespace Celeste
             Audio.SetAltMusic(null);
             inCutscene = false;
             level.ZoomSnap(new Vector2(160f, 90f), interactStartZoom);
-            if (usingSfx != null)
+            if (usingSfx.isValid())
             {
                 Audio.SetParameter(usingSfx, "end", 1f);
                 int num = (int) usingSfx.release();
@@ -193,14 +193,14 @@ namespace Celeste
 
         private void Dispose()
         {
-            if (usingSfx != null)
+            if (usingSfx.isValid())
             {
                 Audio.SetParameter(usingSfx, "quit", 1f);
                 int num = (int) usingSfx.release();
-                usingSfx = null;
+                usingSfx = default;
             }
             Audio.ReleaseSnapshot(snapshot);
-            snapshot = null;
+            snapshot = default;
         }
     }
 }

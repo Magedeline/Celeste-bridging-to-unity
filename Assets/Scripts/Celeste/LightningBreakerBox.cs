@@ -236,7 +236,7 @@ namespace Celeste
                     Audio.SetMusic(SFX.EventnameByHandle(music), false);
                 if (musicProgress >= 0)
                     Audio.SetMusicParam("progress", musicProgress);
-                if (!string.IsNullOrEmpty(music) && Audio.CurrentMusicEventInstance != null)
+                if (!string.IsNullOrEmpty(music) && Audio.CurrentMusicEventInstance.isValid())
                 {
                     int num = (int) Audio.CurrentMusicEventInstance.start();
                 }

@@ -187,7 +187,7 @@ namespace Celeste
             Audio.SetAltMusic(null);
             Audio.EndSnapshot(Level.DialogSnapshot);
             Audio.ReleaseSnapshot(Level.AssistSpeedSnapshot);
-            Level.AssistSpeedSnapshot = null;
+            Level.AssistSpeedSnapshot = default;
             Level.AssistSpeedSnapshotValue = -1;
             GameplayBuffers.Unload();
             ClutterBlockGenerator.Dispose();
@@ -1544,10 +1544,10 @@ namespace Celeste
                 Engine.TimeRateB = num1 / 10f;
                 if (num1 != 10)
                 {
-                    if (AssistSpeedSnapshot == null || Level.AssistSpeedSnapshotValue != num1)
+                    if (!AssistSpeedSnapshot.isValid() || Level.AssistSpeedSnapshotValue != num1)
                     {
                         Audio.ReleaseSnapshot(Level.AssistSpeedSnapshot);
-                        Level.AssistSpeedSnapshot = null;
+                        Level.AssistSpeedSnapshot = default;
                         Level.AssistSpeedSnapshotValue = num1;
                         if (Level.AssistSpeedSnapshotValue < 10)
                             Level.AssistSpeedSnapshot = Audio.CreateSnapshot("snapshot:/assist_game_speed/assist_speed_" + Level.AssistSpeedSnapshotValue * 10);
@@ -1555,10 +1555,10 @@ namespace Celeste
                             Level.AssistSpeedSnapshot = Audio.CreateSnapshot("snapshot:/variant_speed/variant_speed_" + Level.AssistSpeedSnapshotValue * 10);
                     }
                 }
-                else if (AssistSpeedSnapshot != null)
+                else if (AssistSpeedSnapshot.isValid())
                 {
                     Audio.ReleaseSnapshot(Level.AssistSpeedSnapshot);
-                    Level.AssistSpeedSnapshot = null;
+                    Level.AssistSpeedSnapshot = default;
                     Level.AssistSpeedSnapshotValue = -1;
                 }
                 if (wasPaused && !Paused)

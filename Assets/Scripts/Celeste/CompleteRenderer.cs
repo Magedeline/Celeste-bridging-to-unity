@@ -212,7 +212,7 @@ namespace Celeste
                 bool flag = SaveData.Instance != null && SaveData.Instance.Assists.MirrorMode;
                 if (flag)
                 {
-                    position.X = (float) (1920.0 - position.X - image.DrawOffset.X * (double) Scale - image.Texture.Texture.Width * (double) Scale);
+                    position.X = (float) (1920.0 - position.X - image.DrawOffset.X * (double) Scale - image.Texture.Width * (double) Scale);
                     position.Y += image.DrawOffset.Y * Scale;
                 }
                 else

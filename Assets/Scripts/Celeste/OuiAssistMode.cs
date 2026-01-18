@@ -71,7 +71,7 @@ namespace Celeste
                 ouiAssistMode.fade -= Engine.DeltaTime * 4f;
                 yield return null;
             }
-            if (ouiAssistMode.mainSfx != null)
+            if (ouiAssistMode.mainSfx.isValid())
             {
                 int num = (int) ouiAssistMode.mainSfx.release();
             }

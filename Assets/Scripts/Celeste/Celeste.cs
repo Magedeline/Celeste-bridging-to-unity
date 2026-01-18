@@ -1,4 +1,4 @@
-﻿using Celeste.Pico8;
+using Celeste.Pico8;
 using Microsoft.Xna.Framework;
 using Monocle;
 #if ENABLE_STEAM
@@ -11,6 +11,11 @@ using System.Threading;
 
 namespace Celeste
 {
+    /// <summary>
+    /// Main Celeste game class - Unity adapted.
+    /// In Unity, this is typically attached to a GameObject and managed by UnityEngine.
+    /// The Engine base class has been adapted for Unity's update loop.
+    /// </summary>
     public class Celeste : Engine
     {
         public enum PlayModes
@@ -28,7 +33,7 @@ namespace Celeste
         public static PlayModes PlayMode = PlayModes.Normal;
         public const string EventName = "";
         public const bool Beta = false;
-        public const string PLATFORM = "PC";
+        public const string PLATFORM = "UNITY";
         public static new Celeste Instance;
         public static VirtualRenderTarget HudTarget;
         public static VirtualRenderTarget WipeTarget;
@@ -44,7 +49,17 @@ namespace Celeste
 
         public static Vector2 TargetCenter => new Vector2(TargetWidth, TargetHeight) / 2f;
 
-        public Celeste() : base(TargetWidth, TargetHeight, GameWidth * 3, GameHeight * 3, nameof(Celeste), Settings.Instance.Fullscreen, Settings.Instance.VSync)
+        /// <summary>
+        /// Unity-compatible constructor. Settings might not be initialized yet in Unity context.
+        /// </summary>
+        public Celeste() : base(
+            GameWidth, 
+            GameHeight, 
+            TargetWidth, 
+            TargetHeight, 
+            nameof(Celeste),
+            Settings.Instance?.Fullscreen ?? false,
+            Settings.Instance?.VSync ?? true)
         {
             Version = new
 #if ENABLE_STEAM
@@ -53,21 +68,30 @@ namespace Celeste
                 Version(1, 4, 0, 0);
             Instance = this;
             ExitOnEscapeKeypress = false;
-            IsFixedTimeStep = true;
 #if ENABLE_STEAM
             Stats.MakeRequest();
 #endif
             StatsForStadia.MakeRequest();
-            Console.WriteLine("CELESTE : " + Version);
+            UnityEngine.Debug.Log("CELESTE : " + Version + " (Unity)");
         }
 
-        protected override void Initialize()
+        /// <summary>
+        /// Initialize Celeste. Called from Unity's initialization (e.g., Awake or Start).
+        /// </summary>
+        public override void Initialize()
         {
+            _mainThreadId = Thread.CurrentThread.ManagedThreadId;
+            
             base.Initialize();
-            Settings.Instance.AfterLoad();
-            if (Settings.Instance.Fullscreen)
-                ViewPadding = Settings.Instance.ViewportPadding;
-            Settings.Instance.ApplyScreen();
+            
+            if (Settings.Instance != null)
+            {
+                Settings.Instance.AfterLoad();
+                if (Settings.Instance.Fullscreen)
+                    ViewPadding = Settings.Instance.ViewportPadding;
+                Settings.Instance.ApplyScreen();
+            }
+            
             SFX.Initialize();
             Tags.Initialize();
             Input.Initialize();
@@ -75,30 +99,62 @@ namespace Celeste
             Scene = new GameLoader();
         }
 
-        protected override void LoadContent()
+        /// <summary>
+        /// Load Celeste content. Called after Initialize.
+        /// </summary>
+        public override void LoadContent()
         {
             base.LoadContent();
-            Console.WriteLine("BEGIN LOAD");
+            UnityEngine.Debug.Log("BEGIN LOAD");
             LoadTimer = Stopwatch.StartNew();
-            PlaybackData.Load();
+            
+            try
+            {
+                PlaybackData.Load();
+            }
+            catch (Exception ex)
+            {
+                UnityEngine.Debug.LogWarning("PlaybackData.Load failed: " + ex.Message);
+            }
+            
             if (firstLoad)
             {
                 firstLoad = false;
                 HudTarget = VirtualContent.CreateRenderTarget("hud-target", TargetWidth + 2, TargetHeight + 2);
                 WipeTarget = VirtualContent.CreateRenderTarget("wipe-target", TargetWidth + 2, TargetHeight + 2);
-                OVR.Load();
-                GFX.Load();
-                MTN.Load();
+                
+                try
+                {
+                    OVR.Load();
+                    GFX.Load();
+                    MTN.Load();
+                }
+                catch (Exception ex)
+                {
+                    UnityEngine.Debug.LogError("Content loading failed: " + ex.Message);
+                }
             }
+            
             if (GFX.Game != null)
             {
                 Monocle.Draw.Particle = GFX.Game["util/particle"];
                 Monocle.Draw.Pixel = new MTexture(GFX.Game["util/pixel"], 1, 1, 1, 1);
             }
-            GFX.LoadEffects();
+            
+            try
+            {
+                GFX.LoadEffects();
+            }
+            catch (Exception ex)
+            {
+                UnityEngine.Debug.LogWarning("GFX.LoadEffects failed: " + ex.Message);
+            }
         }
 
-        protected override void Update(GameTime gameTime)
+        /// <summary>
+        /// Update Celeste. Call from Unity's Update with Time.deltaTime.
+        /// </summary>
+        public override void Update(float deltaTime)
         {
 #if ENABLE_STEAM
             SteamAPI.RunCallbacks();
@@ -106,7 +162,7 @@ namespace Celeste
             SaveRoutine?.Update();
             AutoSplitterInfo.Update();
             Audio.Update();
-            base.Update(gameTime);
+            base.Update(deltaTime);
             Input.UpdateGrab();
         }
 
@@ -122,14 +178,19 @@ namespace Celeste
             Glitch.Value = 0.0f;
         }
 
-        protected override void RenderCore()
+        /// <summary>
+        /// Render Celeste. In Unity, call this from a camera's OnPostRender or similar.
+        /// </summary>
+        public override void Render()
         {
-            base.RenderCore();
-            if (DisconnectUI == null)
-                return;
-            DisconnectUI.Render();
+            base.Render();
+            if (DisconnectUI != null)
+                DisconnectUI.Render();
         }
 
+        /// <summary>
+        /// Freeze game for a duration (used for hit-stop effects, etc.)
+        /// </summary>
         public static void Freeze(float time)
         {
             if (FreezeTimer >= (double)time)
@@ -142,6 +203,12 @@ namespace Celeste
 
         public static bool IsMainThread => Thread.CurrentThread.ManagedThreadId == _mainThreadId;
 
+        /// <summary>
+        /// Unity entry point - not used in Unity builds.
+        /// Keep for compatibility or testing standalone builds.
+        /// In Unity, initialization happens through MonoBehaviour lifecycle.
+        /// </summary>
+        [Conditional("STANDALONE_BUILD")]
         private static void Main(string[] args)
         {
             Celeste celeste;
@@ -175,10 +242,12 @@ namespace Celeste
                         Input.OverrideInputPrefix = args[++index];
                 }
                 celeste = new Celeste();
+                celeste.Initialize();
+                celeste.LoadContent();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                UnityEngine.Debug.LogError(ex.ToString());
                 ErrorLog.Write(ex);
                 try
                 {
@@ -187,16 +256,18 @@ namespace Celeste
                 }
                 catch
                 {
-                    Console.WriteLine("Failed to open the log!");
+                    UnityEngine.Debug.LogError("Failed to open the log!");
                     return;
                 }
             }
-            celeste.RunWithLogging();
-            RunThread.WaitAll();
-            celeste.Dispose();
-            Audio.Unload();
+            
+            // In Unity, the update loop is handled by Unity's MonoBehaviour
+            // RunWithLogging is not used
         }
 
+        /// <summary>
+        /// Reload game assets (levels, graphics, etc.)
+        /// </summary>
         public static void ReloadAssets(bool levels, bool graphics, bool hires, AreaKey? area = null)
         {
             if (levels)
@@ -208,67 +279,88 @@ namespace Celeste
 
         public static void ReloadLevels(AreaKey? area = null)
         {
-            if (area is null)
+            if (area == null)
             {
-                throw new ArgumentNullException(nameof(area));
+                UnityEngine.Debug.LogWarning("ReloadLevels called with null area - full reload not implemented");
+                return;
+            }
+            
+            // Implement level reloading logic here
+            UnityEngine.Debug.Log($"Reloading levels for area: {area}");
+        }
+
+        public static void ReloadPortraits()
+        {
+            // Implement portrait reloading
+            UnityEngine.Debug.Log("ReloadPortraits - not yet implemented");
+        }
+
+        public static void ReloadDialog()
+        {
+            // Implement dialog reloading
+            UnityEngine.Debug.Log("ReloadDialog - not yet implemented");
+        }
+
+        /// <summary>
+        /// Call an external process (for modding tools, etc.)
+        /// </summary>
+        private static void CallProcess(string path, string args = "", bool createWindow = false)
+        {
+            try
+            {
+                Process process = new()
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = path,
+                        WorkingDirectory = Path.GetDirectoryName(path),
+                        RedirectStandardOutput = false,
+                        CreateNoWindow = !createWindow,
+                        UseShellExecute = false,
+                        Arguments = args
+                    }
+                };
+                process.Start();
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                UnityEngine.Debug.LogError($"Failed to call process {path}: {ex.Message}");
             }
         }
 
-        public static void ReloadPortraits() { }
-
-        public static void ReloadDialog() { }
-
-        private static void CallProcess(string path, string args = "", bool createWindow = false)
-        {
-            Process process = new()
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = path,
-                    WorkingDirectory = Path.GetDirectoryName(path),
-                    RedirectStandardOutput = false,
-                    CreateNoWindow = !createWindow,
-                    UseShellExecute = false,
-                    Arguments = args
-                }
-            };
-            process.Start();
-            process.WaitForExit();
-        }
-
+        /// <summary>
+        /// Pause the game from anywhere (useful for debugging)
+        /// </summary>
         public static bool PauseAnywhere()
         {
             switch (Scene)
             {
-                case Level _:
-                    Level scene1 = Scene as Level;
-                    if (scene1.CanPause)
+                case Level level:
+                    if (level.CanPause)
                     {
-                        scene1.Pause();
+                        level.Pause();
                         return true;
                     }
                     break;
-                case Emulator _:
-                    Emulator scene2 = Scene as Emulator;
-                    if (scene2.CanPause)
+                case Emulator emulator:
+                    if (emulator.CanPause)
                     {
-                        scene2.CreatePauseMenu();
+                        emulator.CreatePauseMenu();
                         return true;
                     }
                     break;
-                case IntroVignette _:
-                    IntroVignette scene3 = Scene as IntroVignette;
-                    if (scene3.CanPause)
+                case IntroVignette introVignette:
+                    if (introVignette.CanPause)
                     {
-                        scene3.OpenMenu();
+                        introVignette.OpenMenu();
                         return true;
                     }
                     break;
-                case CoreVignette _:
-                    CoreVignette scene4 = Scene as CoreVignette;
-                    if (scene4.CanPause)
+                case CoreVignette coreVignette:
+                    if (coreVignette.CanPause)
                     {
-                        scene4.OpenMenu();
+                        coreVignette.OpenMenu();
                         return true;
                     }
                     break;

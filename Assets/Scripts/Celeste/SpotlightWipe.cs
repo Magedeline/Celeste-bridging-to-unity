@@ -31,11 +31,11 @@ namespace Celeste
 
         public override void Cancel()
         {
-            if (sfx != null)
+            if (sfx.isValid())
             {
                 int num1 = (int) sfx.stop(STOP_MODE.IMMEDIATE);
                 int num2 = (int) sfx.release();
-                sfx = null;
+                sfx = default;
             }
             base.Cancel();
         }

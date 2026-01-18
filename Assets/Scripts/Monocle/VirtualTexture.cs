@@ -164,7 +164,7 @@ namespace Monocle
             
             Texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
             Texture.filterMode = FilterMode.Point;
-            Texture.LoadRawTextureData(buffer, 0, totalSize);
+            Texture.LoadRawTextureData(buffer);
             Texture.Apply();
         }
 

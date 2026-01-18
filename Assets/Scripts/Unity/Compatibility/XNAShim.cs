@@ -3,6 +3,7 @@
 // allowing original Celeste code to compile with minimal changes.
 
 using System;
+using System.IO;
 using UnityEngine;
 
 namespace Microsoft.Xna.Framework
@@ -153,6 +154,14 @@ namespace Microsoft.Xna.Framework
                 position.X * matrix.M13 + position.Y * matrix.M23 + position.Z * matrix.M33 + matrix.M43);
         }
 
+        public static Vector3 Transform(Vector3 value, Quaternion rotation)
+        {
+            UnityEngine.Vector3 v = value;
+            UnityEngine.Quaternion q = rotation;
+            UnityEngine.Vector3 r = q * v;
+            return new Vector3(r.x, r.y, r.z);
+        }
+
         public static Vector3 operator +(Vector3 a, Vector3 b) => new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
         public static Vector3 operator -(Vector3 a, Vector3 b) => new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         public static Vector3 operator *(Vector3 v, float s) => new Vector3(v.X * s, v.Y * s, v.Z * s);
@@ -234,6 +243,26 @@ namespace Microsoft.Xna.Framework
         public static readonly Color CornflowerBlue = new Color(100, 149, 237, 255);
         public static readonly Color LimeGreen = new Color(50, 205, 50, 255);
         public static readonly Color SkyBlue = new Color(135, 206, 235, 255);
+        public static readonly Color Teal = new Color(0, 128, 128, 255);
+        public static readonly Color LightSkyBlue = new Color(135, 206, 250, 255);
+
+        // Additional common named colors used by Celeste/Monocle
+        public static readonly Color Aqua = new Color(0, 255, 255, 255);
+        public static readonly Color AliceBlue = new Color(240, 248, 255, 255);
+        public static readonly Color ForestGreen = new Color(34, 139, 34, 255);
+        public static readonly Color Gold = new Color(255, 215, 0, 255);
+        public static readonly Color DarkOrange = new Color(255, 140, 0, 255);
+        public static readonly Color DarkSlateGray = new Color(47, 79, 79, 255);
+        public static readonly Color DarkSlateBlue = new Color(72, 61, 139, 255);
+        public static readonly Color DarkBlue = new Color(0, 0, 139, 255);
+        public static readonly Color DarkRed = new Color(139, 0, 0, 255);
+        public static readonly Color LawnGreen = new Color(124, 252, 0, 255);
+        public static readonly Color LightSeaGreen = new Color(32, 178, 170, 255);
+        public static readonly Color PaleVioletRed = new Color(219, 112, 147, 255);
+        public static readonly Color LightPink = new Color(255, 182, 193, 255);
+        public static readonly Color Lime = new Color(0, 255, 0, 255);
+        public static readonly Color HotPink = new Color(255, 105, 180, 255);
+        public static readonly Color BlueViolet = new Color(138, 43, 226, 255);
 
         public Color(byte r, byte g, byte b, byte a = 255) { R = r; G = g; B = b; A = a; }
         public Color(int r, int g, int b, int a = 255) 
@@ -378,6 +407,29 @@ namespace Microsoft.Xna.Framework
         public override string ToString() => $"{{X:{X} Y:{Y} Width:{Width} Height:{Height}}}";
     }
 
+    public enum ContainmentType
+    {
+        Disjoint,
+        Contains,
+        Intersects
+    }
+
+    public class BoundingFrustum
+    {
+        public Matrix Matrix { get; set; }
+
+        public BoundingFrustum(Matrix value)
+        {
+            Matrix = value;
+        }
+
+        public ContainmentType Contains(Vector3 point)
+        {
+            // Stubbed containment: assume contains for compatibility.
+            return ContainmentType.Contains;
+        }
+    }
+
     /// <summary>
     /// XNA-compatible Point
     /// </summary>
@@ -500,6 +552,13 @@ namespace Microsoft.Xna.Framework
             result.M11 = cos; result.M12 = sin;
             result.M21 = -sin; result.M22 = cos;
             return result;
+        }
+
+        public static Matrix CreateFromQuaternion(Quaternion rotation)
+        {
+            UnityEngine.Quaternion q = rotation;
+            UnityEngine.Matrix4x4 m = UnityEngine.Matrix4x4.Rotate(q);
+            return m;
         }
 
         public static Matrix CreateLookAt(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUpVector)
@@ -686,12 +745,55 @@ namespace Microsoft.Xna.Framework
                 q1.W + t2 * (q2.W - q1.W)));
         }
 
+        public static Quaternion Slerp(Quaternion q1, Quaternion q2, float t)
+        {
+            UnityEngine.Quaternion a = q1;
+            UnityEngine.Quaternion b = q2;
+            UnityEngine.Quaternion r = UnityEngine.Quaternion.Slerp(a, b, t);
+            return r;
+        }
+
         public static Quaternion Normalize(Quaternion q)
         {
             float length = (float)Math.Sqrt(q.X * q.X + q.Y * q.Y + q.Z * q.Z + q.W * q.W);
             if (length > 0)
                 return new Quaternion(q.X / length, q.Y / length, q.Z / length, q.W / length);
             return Identity;
+        }
+
+        public float Length()
+            => (float)Math.Sqrt(X * X + Y * Y + Z * Z + W * W);
+
+        public float LengthSquared()
+            => X * X + Y * Y + Z * Z + W * W;
+
+        public void Normalize()
+        {
+            float length = Length();
+            if (length > 0)
+            {
+                X /= length;
+                Y /= length;
+                Z /= length;
+                W /= length;
+            }
+        }
+
+        public void Conjugate()
+        {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
+        }
+
+        public static Quaternion Conjugate(Quaternion value)
+            => new Quaternion(-value.X, -value.Y, -value.Z, value.W);
+
+        public static Quaternion CreateFromRotationMatrix(Matrix matrix)
+        {
+            UnityEngine.Matrix4x4 m = matrix;
+            UnityEngine.Quaternion q = m.rotation;
+            return q;
         }
 
         public static Quaternion operator *(Quaternion a, Quaternion b)
@@ -702,6 +804,12 @@ namespace Microsoft.Xna.Framework
                 a.W * b.Z + a.X * b.Y - a.Y * b.X + a.Z * b.W,
                 a.W * b.W - a.X * b.X - a.Y * b.Y - a.Z * b.Z);
         }
+
+        public static Quaternion operator *(Quaternion q, float s)
+            => new Quaternion(q.X * s, q.Y * s, q.Z * s, q.W * s);
+
+        public static Quaternion operator *(float s, Quaternion q)
+            => q * s;
 
         public static bool operator ==(Quaternion a, Quaternion b) => a.X == b.X && a.Y == b.Y && a.Z == b.Z && a.W == b.W;
         public static bool operator !=(Quaternion a, Quaternion b) => !(a == b);
@@ -795,6 +903,7 @@ namespace Microsoft.Xna.Framework
             float d = -2f * amountCubed + 3f * amountSquared;
             return value1 * a + tangent1 * b + tangent2 * c + value2 * d;
         }
+
     }
 
     #endregion
@@ -830,6 +939,13 @@ namespace Microsoft.Xna.Framework
 namespace Microsoft.Xna.Framework.Graphics
 {
     #region Graphics Stubs (Unity replaces these)
+
+    public enum CullMode
+    {
+        None = 0,
+        CullClockwiseFace = 1,
+        CullCounterClockwiseFace = 2
+    }
 
     /// <summary>
     /// Stub for XNA SpriteEffects - Unity uses SpriteRenderer flipX/flipY
@@ -935,6 +1051,9 @@ namespace Microsoft.Xna.Framework.Graphics
         public static readonly RasterizerState CullNone = new RasterizerState();
         public static readonly RasterizerState CullClockwise = new RasterizerState();
         public static readonly RasterizerState CullCounterClockwise = new RasterizerState();
+
+        public CullMode CullMode { get; set; } = CullMode.None;
+        public bool MultiSampleAntiAlias { get; set; }
     }
 
     /// <summary>
@@ -945,6 +1064,17 @@ namespace Microsoft.Xna.Framework.Graphics
         public EffectTechniqueCollection Techniques { get; } = new EffectTechniqueCollection();
         public EffectTechnique CurrentTechnique { get; set; }
         public EffectParameterCollection Parameters { get; } = new EffectParameterCollection();
+
+        public Effect() { }
+
+        // Compatibility ctor used by some Celeste classes (e.g. `CustomSpriteEffect`)
+        public Effect(Effect cloneSource)
+        {
+            if (cloneSource != null)
+            {
+                CurrentTechnique = cloneSource.CurrentTechnique;
+            }
+        }
 
         public virtual void Dispose() { }
     }
@@ -963,7 +1093,30 @@ namespace Microsoft.Xna.Framework.Graphics
         }
     }
 
-    public class EffectTechnique { }
+    public sealed class EffectPass
+    {
+        public string Name { get; set; }
+        public void Apply() { }
+    }
+
+    public sealed class EffectPassCollection : System.Collections.Generic.IEnumerable<EffectPass>
+    {
+        private readonly System.Collections.Generic.List<EffectPass> _passes = new()
+        {
+            new EffectPass { Name = "Pass0" }
+        };
+
+        public EffectPass this[int index] => _passes[index];
+        public int Count => _passes.Count;
+
+        public System.Collections.Generic.IEnumerator<EffectPass> GetEnumerator() => _passes.GetEnumerator();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => _passes.GetEnumerator();
+    }
+
+    public class EffectTechnique
+    {
+        public EffectPassCollection Passes { get; } = new EffectPassCollection();
+    }
 
     public class EffectParameterCollection
     {
@@ -988,6 +1141,8 @@ namespace Microsoft.Xna.Framework.Graphics
         public void SetValue(Microsoft.Xna.Framework.Matrix value) { }
         public void SetValue(Texture2D value) { }
         public void SetValue(float[] value) { }
+        public void SetValue(Microsoft.Xna.Framework.Vector3[] value) { }
+        public void SetValue(Microsoft.Xna.Framework.Color[] value) { }
     }
 
     /// <summary>
@@ -995,12 +1150,17 @@ namespace Microsoft.Xna.Framework.Graphics
     /// </summary>
     public class Texture2D : Texture
     {
-        public UnityEngine.Texture2D UnityTexture { get; private set; }
+        public UnityEngine.Texture2D UnityTexture { get; protected set; }
 
         public Texture2D(int width, int height)
         {
             UnityTexture = new UnityEngine.Texture2D(width, height, TextureFormat.RGBA32, false);
             UnityTexture.filterMode = FilterMode.Point;
+        }
+
+        public Texture2D(UnityEngine.Texture2D texture)
+        {
+            UnityTexture = texture;
         }
 
         public int Width => UnityTexture?.width ?? 0;
@@ -1054,6 +1214,12 @@ namespace Microsoft.Xna.Framework.Graphics
 
         // Implicit conversion to Unity Texture2D
         public static implicit operator UnityEngine.Texture2D(Texture2D tex) => tex?.UnityTexture;
+
+        public static implicit operator Texture2D(UnityEngine.Texture2D tex)
+            => tex == null ? null : new Texture2D(tex);
+
+        public static implicit operator Texture2D(UnityEngine.RenderTexture tex)
+            => tex == null ? null : new RenderTarget2D(tex);
     }
 
     /// <summary>
@@ -1063,6 +1229,12 @@ namespace Microsoft.Xna.Framework.Graphics
     {
         public bool IsDisposed { get; protected set; }
         public virtual void Dispose() { IsDisposed = true; }
+
+        public static implicit operator Texture(UnityEngine.Texture2D tex)
+            => tex == null ? null : new Texture2D(tex);
+
+        public static implicit operator Texture(UnityEngine.RenderTexture tex)
+            => tex == null ? null : new RenderTarget2D(tex);
     }
 
     /// <summary>
@@ -1077,6 +1249,12 @@ namespace Microsoft.Xna.Framework.Graphics
         {
             RenderTexture = new RenderTexture(width, height, depth ? 24 : 0, RenderTextureFormat.ARGB32);
             RenderTexture.Create();
+        }
+
+        public RenderTarget2D(RenderTexture renderTexture)
+        {
+            RenderTexture = renderTexture;
+            UnityTexture = null;
         }
 
         public new int Width => RenderTexture?.width ?? 0;
@@ -1094,6 +1272,53 @@ namespace Microsoft.Xna.Framework.Graphics
         }
 
         public static implicit operator RenderTexture(RenderTarget2D rt) => rt?.RenderTexture;
+
+        public static implicit operator RenderTarget2D(RenderTexture rt)
+            => rt == null ? null : new RenderTarget2D(rt);
+    }
+
+    public static class UnityTextureExtensions
+    {
+        public static void SetData<T>(this UnityEngine.Texture2D texture, T[] data) where T : struct
+        {
+            if (texture == null || data == null)
+                return;
+            if (data is Microsoft.Xna.Framework.Color[] colors)
+            {
+                Color32[] pixels = new Color32[colors.Length];
+                for (int i = 0; i < colors.Length; i++)
+                    pixels[i] = new Color32(colors[i].R, colors[i].G, colors[i].B, colors[i].A);
+                texture.SetPixels32(pixels);
+                texture.Apply();
+            }
+            else if (data is byte[] bytes)
+            {
+                texture.LoadRawTextureData(bytes);
+                texture.Apply();
+            }
+        }
+
+        public static void GetData<T>(this UnityEngine.Texture2D texture, T[] data) where T : struct
+        {
+            if (texture == null || data == null)
+                return;
+            if (data is Microsoft.Xna.Framework.Color[] colors)
+            {
+                var pixels = texture.GetPixels32();
+                for (int i = 0; i < Math.Min(colors.Length, pixels.Length); i++)
+                    colors[i] = new Microsoft.Xna.Framework.Color(pixels[i].r, pixels[i].g, pixels[i].b, pixels[i].a);
+            }
+        }
+
+        public static void SetData<T>(this UnityEngine.RenderTexture texture, T[] data) where T : struct
+        {
+            // Stub: no-op for compatibility.
+        }
+
+        public static void GetData<T>(this UnityEngine.RenderTexture texture, T[] data) where T : struct
+        {
+            // Stub: no-op for compatibility.
+        }
     }
 
     /// <summary>
@@ -1246,6 +1471,17 @@ namespace Microsoft.Xna.Framework.Graphics
         public bool IsDisposed { get; private set; }
         public Viewport Viewport { get; set; }
 
+        public GraphicsAdapter Adapter { get; } = GraphicsAdapter.DefaultAdapter;
+
+        public TextureCollection Textures { get; } = new TextureCollection();
+        public SamplerStateCollection SamplerStates { get; } = new SamplerStateCollection();
+
+        public BlendState BlendState { get; set; }
+        public DepthStencilState DepthStencilState { get; set; }
+        public RasterizerState RasterizerState { get; set; }
+
+        public IndexBuffer Indices { get; set; }
+
         public void SetRenderTarget(RenderTarget2D renderTarget)
         {
             // Unity: Use RenderTexture.active or Camera.targetTexture
@@ -1266,10 +1502,262 @@ namespace Microsoft.Xna.Framework.Graphics
             GL.Clear(true, true, color);
         }
 
+        public void DrawUserPrimitives<T>(PrimitiveType primitiveType, T[] vertexData, int vertexOffset, int primitiveCount)
+            where T : struct
+        {
+            // Stub: no-op. Rendering is handled by Unity.
+        }
+
+        public void DrawUserIndexedPrimitives<T>(
+            PrimitiveType primitiveType,
+            T[] vertexData,
+            int vertexOffset,
+            int numVertices,
+            short[] indexData,
+            int indexOffset,
+            int primitiveCount)
+            where T : struct
+        {
+            // Stub: no-op.
+        }
+
+        public void DrawUserIndexedPrimitives<T>(
+            PrimitiveType primitiveType,
+            T[] vertexData,
+            int vertexOffset,
+            int numVertices,
+            int[] indexData,
+            int indexOffset,
+            int primitiveCount)
+            where T : struct
+        {
+            // Stub: no-op.
+        }
+
+        public void DrawIndexedPrimitives(
+            PrimitiveType primitiveType,
+            int baseVertex,
+            int minVertexIndex,
+            int numVertices,
+            int startIndex,
+            int primitiveCount)
+        {
+            // Stub: no-op.
+        }
+
+        public void SetVertexBuffer(VertexBuffer vertexBuffer)
+        {
+            // Stub: no-op.
+        }
+
+        public void DrawPrimitives(PrimitiveType primitiveType, int vertexStart, int primitiveCount)
+        {
+            // Stub: no-op.
+        }
+
         public void Dispose()
         {
             IsDisposed = true;
         }
+    }
+
+    public enum PrimitiveType
+    {
+        TriangleList = 0,
+        TriangleStrip = 1,
+        LineList = 2,
+        LineStrip = 3
+    }
+
+    public interface IVertexType
+    {
+        VertexDeclaration VertexDeclaration { get; }
+    }
+
+    public sealed class VertexDeclaration
+    {
+        public VertexDeclaration(params VertexElement[] elements)
+        {
+            Elements = elements ?? Array.Empty<VertexElement>();
+        }
+
+        public VertexElement[] Elements { get; }
+    }
+
+    public struct VertexElement
+    {
+        public int Offset;
+        public VertexElementFormat VertexElementFormat;
+        public VertexElementUsage VertexElementUsage;
+        public int UsageIndex;
+
+        public VertexElement(int offset, VertexElementFormat elementFormat, VertexElementUsage elementUsage, int usageIndex)
+        {
+            Offset = offset;
+            VertexElementFormat = elementFormat;
+            VertexElementUsage = elementUsage;
+            UsageIndex = usageIndex;
+        }
+    }
+
+    public enum VertexElementFormat
+    {
+        Vector2,
+        Vector3,
+        Color
+    }
+
+    public enum VertexElementUsage
+    {
+        Position,
+        Color,
+        TextureCoordinate
+    }
+
+    public struct VertexPositionColor : IVertexType
+    {
+        public Microsoft.Xna.Framework.Vector3 Position;
+        public Microsoft.Xna.Framework.Color Color;
+
+        public VertexDeclaration VertexDeclaration => new VertexDeclaration();
+
+        public VertexPositionColor(Microsoft.Xna.Framework.Vector3 position, Microsoft.Xna.Framework.Color color)
+        {
+            Position = position;
+            Color = color;
+        }
+    }
+
+    public struct VertexPositionColorTexture : IVertexType
+    {
+        public Microsoft.Xna.Framework.Vector3 Position;
+        public Microsoft.Xna.Framework.Color Color;
+        public Microsoft.Xna.Framework.Vector2 TextureCoordinate;
+
+        public VertexDeclaration VertexDeclaration => new VertexDeclaration();
+
+        public VertexPositionColorTexture(
+            Microsoft.Xna.Framework.Vector3 position,
+            Microsoft.Xna.Framework.Color color,
+            Microsoft.Xna.Framework.Vector2 textureCoordinate)
+        {
+            Position = position;
+            Color = color;
+            TextureCoordinate = textureCoordinate;
+        }
+    }
+
+    public struct VertexPositionTexture : IVertexType
+    {
+        public Microsoft.Xna.Framework.Vector3 Position;
+        public Microsoft.Xna.Framework.Vector2 TextureCoordinate;
+
+        public VertexDeclaration VertexDeclaration => new VertexDeclaration();
+
+        public VertexPositionTexture(
+            Microsoft.Xna.Framework.Vector3 position,
+            Microsoft.Xna.Framework.Vector2 textureCoordinate)
+        {
+            Position = position;
+            TextureCoordinate = textureCoordinate;
+        }
+    }
+
+    public class BasicEffect : Effect
+    {
+        public bool TextureEnabled { get; set; }
+        public bool VertexColorEnabled { get; set; }
+        public Texture2D Texture { get; set; }
+        public Microsoft.Xna.Framework.Matrix World { get; set; }
+        public Microsoft.Xna.Framework.Matrix View { get; set; }
+        public Microsoft.Xna.Framework.Matrix Projection { get; set; }
+
+        public BasicEffect(GraphicsDevice graphicsDevice)
+            : base()
+        {
+        }
+    }
+
+    public class TextureCollection
+    {
+        private readonly Texture[] _slots = new Texture[16];
+
+        public Texture this[int index]
+        {
+            get => _slots[index];
+            set => _slots[index] = value;
+        }
+    }
+
+    public class SamplerStateCollection
+    {
+        private readonly SamplerState[] _slots = new SamplerState[16];
+
+        public SamplerState this[int index]
+        {
+            get => _slots[index];
+            set => _slots[index] = value;
+        }
+    }
+
+    public class IndexBuffer : IDisposable
+    {
+        public bool IsDisposed { get; private set; }
+        public GraphicsDevice GraphicsDevice { get; }
+        public int IndexCount { get; }
+
+        public IndexBuffer() { }
+
+        public IndexBuffer(GraphicsDevice graphicsDevice, Type indexElementSize, int indexCount, BufferUsage bufferUsage)
+        {
+            GraphicsDevice = graphicsDevice;
+            IndexCount = indexCount;
+        }
+
+        public void SetData<T>(T[] data) where T : struct
+        {
+            // Stub: no-op.
+        }
+
+        public void Dispose() => IsDisposed = true;
+    }
+
+    public class VertexBuffer : IDisposable
+    {
+        public bool IsDisposed { get; private set; }
+        public GraphicsDevice GraphicsDevice { get; }
+        public int VertexCount { get; }
+
+        public VertexBuffer() { }
+
+        public VertexBuffer(GraphicsDevice graphicsDevice, VertexDeclaration vertexDeclaration, int vertexCount, BufferUsage bufferUsage)
+        {
+            GraphicsDevice = graphicsDevice;
+            VertexCount = vertexCount;
+        }
+
+        public VertexBuffer(GraphicsDevice graphicsDevice, Type vertexType, int vertexCount, BufferUsage bufferUsage)
+        {
+            GraphicsDevice = graphicsDevice;
+            VertexCount = vertexCount;
+        }
+
+        public void SetData<T>(T[] data) where T : struct
+        {
+            // Stub: no-op.
+        }
+
+        public void SetData<T>(T[] data, int startIndex, int elementCount) where T : struct
+        {
+            // Stub: no-op.
+        }
+
+        public void Dispose() => IsDisposed = true;
+    }
+
+    public enum BufferUsage
+    {
+        None = 0
     }
 
     /// <summary>
@@ -1295,6 +1783,26 @@ namespace Microsoft.Xna.Framework.Graphics
         public Microsoft.Xna.Framework.Rectangle Bounds => new Microsoft.Xna.Framework.Rectangle(X, Y, Width, Height);
 
         public float AspectRatio => Width / (float)Height;
+    }
+
+    public struct DisplayMode
+    {
+        public int Width { get; }
+        public int Height { get; }
+
+        public DisplayMode(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
+    }
+
+    public class GraphicsAdapter
+    {
+        public static GraphicsAdapter DefaultAdapter { get; } = new GraphicsAdapter();
+
+        public DisplayMode CurrentDisplayMode
+            => new DisplayMode(UnityEngine.Screen.width, UnityEngine.Screen.height);
     }
 
     /// <summary>
@@ -1332,121 +1840,13 @@ namespace Microsoft.Xna.Framework.Graphics
     #endregion
 }
 
-namespace Microsoft.Xna.Framework.Input
+namespace Microsoft.Xna.Framework
 {
-    #region Input Stubs (Unity Input System replaces these)
-
-    public enum Keys
+    public static class TitleContainer
     {
-        None = 0,
-        Back = 8, Tab = 9, Enter = 13, Escape = 27, Space = 32,
-        Left = 37, Up = 38, Right = 39, Down = 40,
-        D0 = 48, D1, D2, D3, D4, D5, D6, D7, D8, D9,
-        A = 65, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
-        LeftShift = 160, RightShift, LeftControl, RightControl, LeftAlt, RightAlt,
-        F1 = 112, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12
+        public static Stream OpenStream(string name)
+            => File.OpenRead(name);
     }
-
-    public enum Buttons
-    {
-        DPadUp = 1,
-        DPadDown = 2,
-        DPadLeft = 4,
-        DPadRight = 8,
-        Start = 16,
-        Back = 32,
-        LeftStick = 64,
-        RightStick = 128,
-        LeftShoulder = 256,
-        RightShoulder = 512,
-        A = 4096,
-        B = 8192,
-        X = 16384,
-        Y = 32768,
-        LeftTrigger = 8388608,
-        RightTrigger = 4194304
-    }
-
-    public enum ButtonState { Released = 0, Pressed = 1 }
-    public enum PlayerIndex { One = 0, Two = 1, Three = 2, Four = 3 }
-
-    public struct KeyboardState
-    {
-        public bool IsKeyDown(Keys key) => UnityEngine.Input.GetKey((KeyCode)key);
-        public bool IsKeyUp(Keys key) => !UnityEngine.Input.GetKey((KeyCode)key);
-        public Keys[] GetPressedKeys() => Array.Empty<Keys>();
-    }
-
-    public struct MouseState
-    {
-        public int X => (int)UnityEngine.Input.mousePosition.x;
-        public int Y => (int)(Screen.height - UnityEngine.Input.mousePosition.y);
-        public ButtonState LeftButton => UnityEngine.Input.GetMouseButton(0) ? ButtonState.Pressed : ButtonState.Released;
-        public ButtonState RightButton => UnityEngine.Input.GetMouseButton(1) ? ButtonState.Pressed : ButtonState.Released;
-        public ButtonState MiddleButton => UnityEngine.Input.GetMouseButton(2) ? ButtonState.Pressed : ButtonState.Released;
-        public int ScrollWheelValue => (int)(UnityEngine.Input.mouseScrollDelta.y * 120);
-    }
-
-    public struct GamePadState
-    {
-        public bool IsConnected => false; // Use Unity's new Input System for gamepads
-        public GamePadButtons Buttons => new GamePadButtons();
-        public GamePadDPad DPad => new GamePadDPad();
-        public GamePadThumbSticks ThumbSticks => new GamePadThumbSticks();
-        public GamePadTriggers Triggers => new GamePadTriggers();
-    }
-
-    public struct GamePadButtons
-    {
-        public ButtonState A => ButtonState.Released;
-        public ButtonState B => ButtonState.Released;
-        public ButtonState X => ButtonState.Released;
-        public ButtonState Y => ButtonState.Released;
-        public ButtonState Start => ButtonState.Released;
-        public ButtonState Back => ButtonState.Released;
-        public ButtonState LeftShoulder => ButtonState.Released;
-        public ButtonState RightShoulder => ButtonState.Released;
-        public ButtonState LeftStick => ButtonState.Released;
-        public ButtonState RightStick => ButtonState.Released;
-    }
-
-    public struct GamePadDPad
-    {
-        public ButtonState Up => ButtonState.Released;
-        public ButtonState Down => ButtonState.Released;
-        public ButtonState Left => ButtonState.Released;
-        public ButtonState Right => ButtonState.Released;
-    }
-
-    public struct GamePadThumbSticks
-    {
-        public Microsoft.Xna.Framework.Vector2 Left => Microsoft.Xna.Framework.Vector2.Zero;
-        public Microsoft.Xna.Framework.Vector2 Right => Microsoft.Xna.Framework.Vector2.Zero;
-    }
-
-    public struct GamePadTriggers
-    {
-        public float Left => 0f;
-        public float Right => 0f;
-    }
-
-    public static class Keyboard
-    {
-        public static KeyboardState GetState() => new KeyboardState();
-    }
-
-    public static class Mouse
-    {
-        public static MouseState GetState() => new MouseState();
-    }
-
-    public static class GamePad
-    {
-        public static GamePadState GetState(PlayerIndex index) => new GamePadState();
-        public static bool SetVibration(PlayerIndex index, float leftMotor, float rightMotor) => false;
-    }
-
-    #endregion
 }
 
 namespace Microsoft.Xna.Framework.Content

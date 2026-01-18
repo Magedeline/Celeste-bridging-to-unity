@@ -220,7 +220,7 @@ namespace Celeste
         public override void OnEnd(Level level)
         {
             ScreenWipe.WipeColor = Color.Black;
-            if (Audio.CurrentMusicEventInstance == null)
+            if (!Audio.CurrentMusicEventInstance.isValid())
                 Audio.SetMusic("event:/new_content/music/lvl10/cinematic/end");
             Audio.SetMusicParam("end", 1f);
             frame = 21;
@@ -237,9 +237,9 @@ namespace Celeste
             cursor.Visible = false;
             ok.Visible = false;
             Audio.Stop(cinIntro);
-            cinIntro = null;
+            cinIntro = default;
             Audio.Stop(endAmbience);
-            endAmbience = null;
+            endAmbience = default;
             List<Coroutine> coroutineList = new List<Coroutine>();
             foreach (Coroutine coroutine in Components.GetAll<Coroutine>())
                 coroutineList.Add(coroutine);

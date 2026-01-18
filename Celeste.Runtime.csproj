@@ -1,0 +1,1751 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace>Celeste</RootNamespace>
+    <ProjectGuid>{69F67A67-E30B-E71D-3A01-7570B8A7E943}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Celeste.Runtime</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>.</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWarn>0169;USG0001</NoWarn>
+    <DefineConstants>UNITY_6000_2_8;UNITY_6000_2;UNITY_6000;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2023_1_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2023_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_6000_1_OR_NEWER;UNITY_6000_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_UNITY_CONSENT;ENABLE_UNITY_CLOUD_IDENTIFIERS;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_MARSHALLING_TESTS;ENABLE_VIDEO;ENABLE_NAVIGATION_OFFMESHLINK_TO_NAVMESHLINK;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;TEXTCORE_1_0_OR_NEWER;EDITOR_ONLY_NAVMESH_BUILDER_DEPRECATED;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_AMD;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLOUD_SERVICES_ENGINE_DIAGNOSTICS;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_USES_EXPLICIT_MEMORY_MANAGER_INITIALIZER;PLATFORM_SUPPORTS_WAIT_FOR_PRESENTATION;PLATFORM_SUPPORTS_SPLIT_GRAPHICS_JOBS;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoConfig>true</NoConfig>
+    <NoStdLib>true</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
+    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <UnityProjectGenerator>Package</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>2.0.25</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityVersion>6000.2.8f1</UnityVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\Program Files\Unity 6000.2.8f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
+    <Analyzer Include="D:\Program Files\Unity 6000.2.8f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
+    <Analyzer Include="D:\Program Files\Unity 6000.2.8f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Scripts\Celeste\LightningStrike.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiFileSelect.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BadelineBoost.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS07_Ascend.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StadiaStat.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelTemplateType.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WallBooster.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MrOshiroDoor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Audio.cs" />
+    <Compile Include="Assets\Scripts\Celeste\UnlockEverythingThingy.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_BossMid.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HiresRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CliffFlags.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OVR.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiFileNaming.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Flagline.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BlockField.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SwitchGate.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BestTimeDisplay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerSpriteMode.cs" />
+    <Compile Include="Assets\Scripts\Celeste\EffectCutout.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClutterSwitch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiAssistMode.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SandwichLava.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GameLoader.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC05_Theo_Entrance.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SFX.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC05_Badeline.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DustTrackSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IntroCarBarrier.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS04_Granny.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiCredits.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiMainMenu.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DustEdge.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Dialog.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Torch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelLoader.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Gondola.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleMirrorPortal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CliffsideWindFlag.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LightingRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelExit.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ChaserBarrier.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SwapBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SeekerBarrier.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Textbox.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage06.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SummitGem.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StarTrackSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StrawberriesCounter.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS00_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CoverupWall.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS01_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PicoConsole.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Oshiro_Suite.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RespawnTargetTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelEndingHook.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CameraAdvanceTargetTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Stats.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SteamworksShim.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Memorial.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MovingPlatform.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleMirror.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC04_Granny.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_FreeBird.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelUpEffect.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MoonParticle3D.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SeekerCollider.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HeartGemDoor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FloatySpaceBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MountainCamera.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Solid.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MountainModel.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LightningRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FireBarrier.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HeatWave.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MoonCreature.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS04_MirrorPortal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FallingBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MirrorReflection.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TileInterceptor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IntroPavement.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ReflectionFG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC06_Theo_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_FinalLaunch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Oshiro_Hallway1.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS05_TheoPhone.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MoveBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ModeProperties.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC10_Gravestone.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Maddy3D.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BounceBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NorthernLights.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CrystalStaticSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpawnerAttribute.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TheoCrystalPedestal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Commands.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiTitleScreen.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BeforeRenderHook.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MirrorFG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SaveData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPlaybackTutorial.cs" />
+    <Compile Include="Assets\Scripts\Celeste\KevinsPC.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FloatingDebris.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Input.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IceTileOverlay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC08_Theo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpawnableAttribute.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CutsceneEntity.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlaybackBillboard.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC08_Granny.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BirdNPC.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Water.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GameplayBuffers.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Trapdoor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DashBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Bonfire.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Lightning.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashTutorialMachine.cs" />
+    <Compile Include="Assets\Scripts\Celeste\UnlockedPico8Message.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SolidTiles.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WhiteBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DashCollision.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SeekerEffectsController.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AreaStats.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StopBoostTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RumbleStrength.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Oshiro_Breakdown.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RisingLava.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Door.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MapData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MapEditor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BloomFadeTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WindController.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Theo_Escaping.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Godrays.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WindWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AreaData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DashSwitch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RumbleAmount.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Overlay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CustomBloom.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CoreStarsFG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CassetteBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Hahaha.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RunLengthEncoding.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC05_Theo_Mirror.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournalPoem.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TheoPhone.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_MissTheBird.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LightFadeTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_BossIntro.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Platform.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Lamp.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BackdropRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GFX.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GoldBerryCollectTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Strawberry.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Overworld.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_FinalRoom.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_StarJumpEnd.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DisperseImage.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Achievement.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NoRefillTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CollisionData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BadelineAutoAnimator.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FancyText.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BirdPathTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiChapterSelect.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DetachStrawberryTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_Memo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Achievements.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BreathingMinigame.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LedgeBlocker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MainMenuClimb.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleGate.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FlingBirdIntro.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ChimneySmokeFx.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_OshiroRooftop.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DashListener.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Clothesline.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleBigEyeballShockwave.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HiresSnow.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PrologueEndingText.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GrannyLaughSfx.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage00.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SaveLoadIcon.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Backdrop.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MenuOptions.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ReflectionTentacles.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StatsForStadia.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PreviewPortrait.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PreviewRecording.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FinalBossShot.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CheckpointData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS02_Journal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ParticleTypes.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage05.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ChangeRespawnTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ButtonUI.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Starfield.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OldSiteChaseMusicHandler.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Glitch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Level.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MEP.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlaybackData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournalGlobal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Bumper.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StarRotateSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\InvisibleBarrier.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RidgeGate.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerPlayback.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Emulator.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PostUpdateHook.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CutsceneNode.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ZipMover.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS07_Credits.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SurfaceIndex.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DisplacementRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClutterDoor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\JumpthruPlatform.cs" />
+    <Compile Include="Assets\Scripts\Celeste\JumpThru.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Oshiro_Rooftop.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS07_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS05_Badeline.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CrushBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournalDeaths.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Actor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ForsakenCitySatellite.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StaminaDisplay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Payphone.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpeedRing.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Spring.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GlassBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GoldenBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS02_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CassetteBlockManager.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClutterBlockGenerator.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_Reflection.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FlingBird.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WindMover.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StarfieldWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS04_Gondola.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TouchSwitch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Slider.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BlackholeBG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClutterAbsorbEffect.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HeartWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FinalBossMovingBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS05_SeeTheo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PreviewPostcard.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TriggerSpikes.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerSprite.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GameplayRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SummitCloud.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Fonts.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CurtainWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournalSpeedrun.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BirdPath.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CheckpointBlockerTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MTN.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TestWipes.cs" />
+    <Compile Include="Assets\Scripts\Celeste\UnlockedRemixDisplay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FlutterBird.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC02_Theo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC01_Theo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CrystalColor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Booster.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FileErrorOverlay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TextMenu.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FinalBossStarfield.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_BossEnd.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DreamStars.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerDeadBody.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ScreenWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS00_Granny.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AreaModeStats.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC04_Theo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Cassette.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OshiroTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC07X_Granny_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AnimatedTilesBank.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RainFG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC00_Granny.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ReturnMapHint.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerHair.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BladeRotateSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BloomRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StardustFG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Killbox.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS05_Entrance.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpotlightWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpawnFacingTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LavaRect.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Oui.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_OshiroHallway2.cs" />
+    <Compile Include="Assets\Scripts\Celeste\InputMappingInfo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClutterBlockBase.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MusicTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PropLight.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_OshiroHallway1.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Credits.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleCrackedBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_CatchTheBird.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Bridge.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ButtonConfigUI.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LightningBreakerBox.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_MoonIntro.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Assists.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage01.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GondolaDarkness.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DecalData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RumbleLength.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SeekerStatue.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_OshiroBreakdown.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Decal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Stat.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StarsBG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AnimatedTiles.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GlassBlockBg.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WindTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FadeWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MirrorSurface.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AudioTrackState.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LockBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PufferCollider.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FinalBoss.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ResortMirror.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Snow3D.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BackgroundFadeIn.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CoreMessage.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SoundSource.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_OshiroLobby.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Skybox.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Buses.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournalCover.cs" />
+    <Compile Include="Assets\Scripts\Celeste\EntityID.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IntroCar.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Tentacles.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AudioState.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Classic.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS08_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HoldableCollider.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerDashAssist.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Planets.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WindAttackTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StaticMover.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC09_Granny_Inside.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Oshiro_Hallway2.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_OshiroClutter.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_Diary.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RotateSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DisconnectedControllerUI.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StarJumpController.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TestBreathingGame.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MountainWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MusicFadeTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiOptions.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_BadelineHelps.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_Guestbook.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SummitCheckpoint.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Selfie.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DreamBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TemplePortalTorch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OverworldLoader.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SoundEmitter.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Cobweb.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StrawberrySeed.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerSeeker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Settings.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Collision.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TrackSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiFileSelectSlot.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BirdTutorialGui.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RumbleTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DustGraphic.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MiniTextboxTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FinalBossBeam.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC06_Badeline_Crying.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CameraTargetTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IceBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournalPage.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_Campfire.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PowerSourceNumber.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FakeHeart.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_OshiroMasterSuite.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FMODStudioShim.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DustEdges.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournalProgress.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BloomPoint.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerAnimMetadata.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage02.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Follower.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AutoSavingNotice.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Distort.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DreamHeartGem.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AreaMode.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CameraOffsetTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ColorGrade.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ParticleRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Snowball.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FormationBackdrop.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Oshiro_Lobby.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Poem.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StarJumpBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpaceController.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MountainRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WindSnowFG.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaterFall.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AscendManager.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Autotiler.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Ring.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiJournal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SeekerBarrierRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SummitVignette.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FallEffects.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage04.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CrystalDebris.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SolidOnInvinciblePlayer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LookoutBlocker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GrabModes.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DropWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Facings.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OverworldReflectionsFall.cs" />
+    <Compile Include="Assets\Scripts\Celeste\VertexLight.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GaussianBlur.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleEye.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC06_Theo_Plateau.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Celeste.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ResortLantern.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CrumbleWallOnRumble.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CrouchDashModes.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ObjModel.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Petals.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TalkComponent.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GameplayStats.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MovingPlatformLine.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC06_Granny_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ViewportAdjustmentUI.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CSGEN_StrawberrySeeds.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiChapterSelectIcon.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DisplacementRenderHook.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Cloud.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SummitGemManager.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NegaBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS06_Granny.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OshiroSprite.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IntroCrusher.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HeartGem.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC06_Granny.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Billboard.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Glider.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DeathsCounter.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AltMusicTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Theo_Vents.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RotatingPlatform.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Holdable.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CameraLocker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DeathEffect.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClutterBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Postcard.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC03_Oshiro_Cluttter.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BlackholeStrengthTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\EntityData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TheoCrystal.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_Farewell.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleEndingMusicHandler.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Depths.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SinkingPlatform.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpeedrunType.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AbsorbOrb.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelEnter.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MiniTextbox.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TotalStrawberriesDisplay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\EventTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_HubIntro.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ForegroundDebris.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_Gravestone.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS05_TheoInMirror.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Wire.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Snow.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Seeker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DustStyles.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Trigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IntroVignette.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AreaKey.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpeedrunTimerDisplay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AngledWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CrumblePlatform.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Parallax.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS10_Ending.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TrailManager.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MainMenuSmallButton.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ExitBlock.cs" />
+    <Compile Include="Assets\Scripts\Celeste\QuickResetHint.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Refill.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Plateau.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BadelineOldsite.cs" />
+    <Compile Include="Assets\Scripts\Celeste\KeyboardConfigUI.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BridgeTile.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Lookout.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HeartGemDisplay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MountainState.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HangingLamp.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CustomSpriteEffect.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS05_Reflection1.cs" />
+    <Compile Include="Assets\Scripts\Celeste\VCAs.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPage03.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaterSurface.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CompleteRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaterInteraction.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Dust.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FakeWall.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AreaComplete.cs" />
+    <Compile Include="Assets\Scripts\Celeste\WaveDashPresentation.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MemorialText.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BreathingRumbler.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TempleBigEyeball.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LevelTemplate.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LanguageSelectUI.cs" />
+    <Compile Include="Assets\Scripts\Celeste\KeyDoorWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Spawn.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Tags.cs" />
+    <Compile Include="Assets\Scripts\Celeste\StrawberryPoints.cs" />
+    <Compile Include="Assets\Scripts\Celeste\GrabbyIcon.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Snapshots.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BadelineDummy.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Debris.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BackgroundTiles.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OshiroLobbyBell.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS08_EnterDoor.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FireBall.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ActiveFont.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ResortRoofEnding.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PlayerCollider.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Key.cs" />
+    <Compile Include="Assets\Scripts\Celeste\IOverlayHandler.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Language.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DreamMirror.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Spikes.cs" />
+    <Compile Include="Assets\Scripts\Celeste\PreviewDialog.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ScreenshakeAmount.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BridgeFixed.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AreaCompleteTitle.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SlashFx.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS03_TheoEscape.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ReflectionHeartStatue.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Session.cs" />
+    <Compile Include="Assets\Scripts\Celeste\_3dSoundTest.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DashCollisionResults.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BinaryPacker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DeathData.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AngryOshiro.cs" />
+    <Compile Include="Assets\Scripts\Celeste\UserIO.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClimbBlocker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\OuiChapterPanel.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CoreVignette.cs" />
+    <Compile Include="Assets\Scripts\Celeste\TransitionListener.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS02_BadelineIntro.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MenuButton.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CoreModeListener.cs" />
+    <Compile Include="Assets\Scripts\Celeste\NPC09_Granny_Outside.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AmbienceParamTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MoonGlitchBackgroundTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\ClutterCabinet.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SoundSourceEntity.cs" />
+    <Compile Include="Assets\Scripts\Celeste\AutoSplitterInfo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LightOcclude.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DustStaticSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Puffer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS02_Mirror.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CreditsTrigger.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SinkingPlatformLine.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CoreModeToggle.cs" />
+    <Compile Include="Assets\Scripts\Celeste\LightBeam.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BladeTrackSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DreamWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\RunThread.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MirrorSurfaces.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FlyFeather.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Leader.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SpawnManager.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS05_SaveTheo.cs" />
+    <Compile Include="Assets\Scripts\Celeste\CS02_DreamingPhonecall.cs" />
+    <Compile Include="Assets\Scripts\Celeste\SafeGroundBlocker.cs" />
+    <Compile Include="Assets\Scripts\Celeste\FallWipe.cs" />
+    <Compile Include="Assets\Scripts\Celeste\BigWaterfall.cs" />
+    <Compile Include="Assets\Scripts\Celeste\MagicGlow.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HeightDisplay.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Switch.cs" />
+    <Compile Include="Assets\Scripts\Celeste\Player.cs" />
+    <Compile Include="Assets\Scripts\Celeste\DustRotateSpinner.cs" />
+    <Compile Include="Assets\Scripts\Celeste\HudRenderer.cs" />
+    <Compile Include="Assets\Scripts\Celeste\InteractTrigger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Scripts\Celeste\Celeste.Runtime.asmdef" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.AIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ARModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.AndroidJNIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClothModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterInputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ClusterRendererModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ContentLoadModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ContentLoadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.CrashReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.DSPGraphModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.DirectorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.GameCenterModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GraphicsStateCollectionSerializerModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.GraphicsStateCollectionSerializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HierarchyCoreModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.HierarchyCoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.HotReloadModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IdentifiersModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.IdentifiersModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputForUIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputForUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InsightsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.InsightsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.LocalizationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.MarshallingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.MarshallingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.MultiplayerModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.MultiplayerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PropertiesModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.PropertiesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ShaderVariantAnalyticsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.ShaderVariantAnalyticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.SharedInternalsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.StreamingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.SubsystemsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.TLSModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreFontEngineModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreTextEngineModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.TilemapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConsentModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityConsentModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityCurlModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityCurlModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.VFXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.VRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.VehiclesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.VirtualTexturingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.VirtualTexturingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.WindModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEngine.XRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.AccessibilityModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.AdaptivePerformanceModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.AdaptivePerformanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.BuildProfileModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.BuildProfileModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ClothModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.ClothModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.CoreBusinessMetricsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreBusinessMetricsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.CoreModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DeviceSimulatorModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.DeviceSimulatorModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.DiagnosticsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.DiagnosticsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.EditorToolbarModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.EditorToolbarModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.EmbreeModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.EmbreeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.GIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphViewModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.GraphViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GraphicsStateCollectionSerializerModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.GraphicsStateCollectionSerializerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GridAndSnapModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.GridAndSnapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.GridModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.InAppPurchasingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.InAppPurchasingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.LevelPlayModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.LevelPlayModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.MultiplayerModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.MultiplayerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Physics2DModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PhysicsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PresetsUIModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.PresetsUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.PropertiesModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.PropertiesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.QuickSearchModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.QuickSearchModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SafeModeModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.SafeModeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneTemplateModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.SceneTemplateModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SceneViewModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.SceneViewModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.ShaderFoundryModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.ShaderFoundryModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SketchUpModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.SketchUpModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SpriteMaskModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SpriteShapeModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.SubstanceModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TerrainModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreFontEngineModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.TextCoreFontEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextCoreTextEngineModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.TextCoreTextEngineModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TextRenderingModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TilemapModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.TilemapModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TreeModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.TreeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIAutomationModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIAutomationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIBuilderModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIBuilderModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UIElementsSamplesModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.UIElementsSamplesModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UmbraModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UnityConnectModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VFXModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.VFXModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.VideoModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.VideoModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.XRModule">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.YamlDotNet">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@b4d700247d4b\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.LowLevel.ILSupport">
+      <HintPath>Library\PackageCache\com.unity.collections@d49facba0036\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@b8d65294b30f\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@b8d65294b30f\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@b8d65294b30f\Lib\Editor\log4netPlastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.IonicZip">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@b4d700247d4b\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@b8d65294b30f\Lib\Editor\unityplastic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Hashing">
+      <HintPath>Library\PackageCache\com.unity.collections@d49facba0036\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@b4d700247d4b\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@b4d700247d4b\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d78732e851eb\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.collections@d49facba0036\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.AppContext">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.AppContext.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Concurrent">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.Concurrent.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.NonGeneric">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.NonGeneric.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Specialized">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Collections.Specialized.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.EventBasedAsync">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.EventBasedAsync.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.TypeConverter">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ComponentModel.TypeConverter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Console">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Console.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Common">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Data.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Contracts">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Contracts.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Debug">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Debug.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.FileVersionInfo">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.FileVersionInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Process">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Process.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.StackTrace">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.StackTrace.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TextWriterTraceListener">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tools">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Tools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.TraceSource.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Drawing.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Dynamic.Runtime">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Dynamic.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.Calendars.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Extensions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Globalization.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Compression.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.DriveInfo">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.DriveInfo.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Watcher">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.FileSystem.Watcher.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.IsolatedStorage">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.IsolatedStorage.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.MemoryMappedFiles">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.MemoryMappedFiles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipes">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.Pipes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.UnmanagedMemoryStream">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.IO.UnmanagedMemoryStream.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Expressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Parallel">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Linq.Queryable">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Linq.Queryable.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NameResolution">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.NameResolution.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.NetworkInformation">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.NetworkInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Ping">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Ping.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Requests">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Requests.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Security">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Security.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.Sockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebHeaderCollection">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebHeaderCollection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets.Client">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebSockets.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.WebSockets">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Net.WebSockets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ObjectModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.DispatchProxy">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.DispatchProxy.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.ILGeneration">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.ILGeneration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Emit.Lightweight.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Extensions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reflection.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Reflection.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Reader">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.Reader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.ResourceManager">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.ResourceManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Resources.Writer">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Resources.Writer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.VisualC">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.CompilerServices.VisualC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Handles">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Handles.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.InteropServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Numerics">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Formatters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Json">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Xml">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Runtime.Serialization.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Claims">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Claims.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Csp">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Csp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.Principal.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.SecureString">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Security.SecureString.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.Encoding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding.Extensions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.Encoding.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Text.RegularExpressions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Overlapped">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Overlapped.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Parallel">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Tasks.Parallel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Thread">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Thread.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.ThreadPool.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Timer">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Threading.Timer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.ValueTuple.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.ReaderWriter">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XDocument">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlDocument">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XmlDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XmlSerializer">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XmlSerializer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XPath.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.XPath.XDocument">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netstandard\System.Xml.XPath.XDocument.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\Extensions\2.0.0\System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ComponentModel.Composition.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Drawing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.IO.Compression.FileSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Runtime.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ServiceModel.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Transactions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Windows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Serialization">
+      <HintPath>D:\Program Files\Unity 6000.2.8f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Monocle.Runtime.csproj">
+      <Project>{B9C2FA21-A5DA-6C64-4FFE-9E3805AEC9DF}</Project>
+      <Name>Monocle.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="SimplexNoise.Runtime.csproj">
+      <Project>{6D11BE79-A117-E77B-9565-B27D32BB03BE}</Project>
+      <Name>SimplexNoise.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnity.csproj">
+      <Project>{F48586FB-580E-6DD6-5F64-C797021FD550}</Project>
+      <Name>FMODUnity</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnityResonance.csproj">
+      <Project>{63DDABCF-A025-8425-8F5E-8001AD82D3BD}</Project>
+      <Name>FMODUnityResonance</Name>
+    </ProjectReference>
+    <ProjectReference Include="XNA.Runtime.csproj">
+      <Project>{F3BAD671-927F-BCC9-FFAD-625E6335729E}</Project>
+      <Name>XNA.Runtime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

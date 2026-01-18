@@ -43,7 +43,7 @@ namespace Celeste
                 paused = true;
                 Audio.PauseGameplaySfx = true;
                 timer += Engine.RawDeltaTime;
-                if (timer > 0.20000000298023224 && snapshot == null)
+                if (timer > 0.20000000298023224 && !snapshot.isValid())
                     EnableSnapshot();
                 Player entity = Scene.Tracker.GetEntity<Player>();
                 if (entity == null)
@@ -93,10 +93,10 @@ namespace Celeste
 
         private void DisableSnapshot()
         {
-            if (!(snapshot != null))
+            if (!snapshot.isValid())
                 return;
             Audio.ReleaseSnapshot(snapshot);
-            snapshot = null;
+            snapshot = default;
         }
 
         public override void Removed(Scene scene)

@@ -6,7 +6,8 @@
         "SimplexNoise.Runtime",
         "Unity.InputSystem",
         "FMODUnity",
-        "FMODUnityResonance"
+        "FMODUnityResonance",
+        "XNA.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

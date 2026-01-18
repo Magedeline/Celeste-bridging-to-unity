@@ -38,7 +38,7 @@ namespace Celeste.Editor
         /// <summary>
         /// The level list.
         /// </summary>
-        private readonly List<LevelTemplate> levels = [];
+        private readonly List<LevelTemplate> levels = new List<LevelTemplate>();
 
         /// <summary>
         /// The current mouse position.
@@ -60,22 +60,22 @@ namespace Celeste.Editor
         /// <summary>
         /// The currently selected levels.
         /// </summary>
-        private readonly HashSet<LevelTemplate> selection = [];
+        private readonly HashSet<LevelTemplate> selection = new HashSet<LevelTemplate>();
         /// <summary>
         /// The currently hovered levels.
         /// </summary>
-        private readonly HashSet<LevelTemplate> hovered = [];
+        private readonly HashSet<LevelTemplate> hovered = new HashSet<LevelTemplate>();
 
         private readonly float fade;
 
         /// <summary>
         /// Stack of undo actions.
         /// </summary>
-        private readonly List<Vector2[]> undoStack = [];
+        private readonly List<Vector2[]> undoStack = new List<Vector2[]>();
         /// <summary>
         /// Stack of redo actions.
         /// </summary>
-        private readonly List<Vector2[]> redoStack = [];
+        private readonly List<Vector2[]> redoStack = new List<Vector2[]>();
 
         /// <summary>
         /// Constructs a map editor for an area.

@@ -285,11 +285,10 @@ namespace Celeste
                 sprite.Play("fly");
                 sprite.CenterOrigin();
                 sprite.Color = ForsakenCitySatellite.Colors[code];
-                dash = (Vector2.Zero with
-                {
-                    X = (code.Contains('L') ? -1f : (code.Contains('R') ? 1f : 0.0f)),
-                    Y = (code.Contains('U') ? -1f : (code.Contains('D') ? 1f : 0.0f))
-                }).SafeNormalize();
+                Vector2 dashVector = Vector2.Zero;
+                dashVector.X = code.Contains('L') ? -1f : (code.Contains('R') ? 1f : 0.0f);
+                dashVector.Y = code.Contains('U') ? -1f : (code.Contains('D') ? 1f : 0.0f);
+                dash = dashVector.SafeNormalize();
                 Add(routine = new Coroutine(AimlessFlightRoutine()));
             }
 

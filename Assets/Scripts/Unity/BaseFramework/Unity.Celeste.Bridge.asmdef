@@ -2,7 +2,10 @@
     "name": "Unity.Celeste.Bridge",
     "rootNamespace": "Unity.Celeste",
     "references": [
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "XNA.Runtime",
+        "Celeste.Runtime",
+        "Monocle.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

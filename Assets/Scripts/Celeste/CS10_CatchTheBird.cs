@@ -210,7 +210,7 @@ namespace Celeste
         {
             CS10_CatchTheBird cs10CatchTheBird = this;
             Audio.ReleaseSnapshot(cs10CatchTheBird.snapshot);
-            cs10CatchTheBird.snapshot = null;
+            cs10CatchTheBird.snapshot = default;
             Audio.Play("event:/new_content/char/badeline/birdcrash_scene_float", cs10CatchTheBird.badeline.Position);
             cs10CatchTheBird.Add(new Coroutine(cs10CatchTheBird.badeline.FloatTo(cs10CatchTheBird.player.Position + new Vector2(-16f, -16f), 1)));
             Level scene = cs10CatchTheBird.Scene as Level;
@@ -222,7 +222,7 @@ namespace Celeste
         public override void OnEnd(Level level)
         {
             Audio.ReleaseSnapshot(snapshot);
-            snapshot = null;
+            snapshot = default;
             if (WasSkipped)
             {
                 CutsceneNode cutsceneNode = CutsceneNode.Find("player_skip");

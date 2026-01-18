@@ -70,7 +70,7 @@ namespace Celeste
                     routine.Replace(Close());
                 }
             });
-            if (Level.DialogSnapshot == null)
+            if (!Level.DialogSnapshot.isValid())
                 Level.DialogSnapshot = Audio.CreateSnapshot("snapshot:/dialogue_in_progress", false);
             Audio.ResumeSnapshot(Level.DialogSnapshot);
         }

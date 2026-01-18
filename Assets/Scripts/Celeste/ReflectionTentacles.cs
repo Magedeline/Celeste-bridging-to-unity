@@ -308,8 +308,8 @@ namespace Celeste
         {
             if (subtexture == null)
                 subtexture = GFX.Game["util/pixel"];
-            float num1 = 1f / subtexture.Texture.Texture.Width;
-            float num2 = 1f / subtexture.Texture.Texture.Height;
+            float num1 = 1f / subtexture.Texture.Width;
+            float num2 = 1f / subtexture.Texture.Height;
             double x1 = subtexture.ClipRect.Left * (double) num1;
             Rectangle clipRect1 = subtexture.ClipRect;
             double y1 = clipRect1.Top * (double) num2;

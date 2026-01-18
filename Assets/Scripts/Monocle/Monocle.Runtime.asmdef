@@ -1,7 +1,9 @@
 {
     "name": "Monocle.Runtime",
     "rootNamespace": "Monocle",
-    "references": [],
+    "references": [
+        "XNA.Runtime"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

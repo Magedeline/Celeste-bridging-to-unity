@@ -62,11 +62,11 @@ namespace Celeste
         {
             this.color = color;
             Tag = (int) Tags.TransitionUpdate;
-            Collider = new ColliderList(
-            [
-                 new Circle(6f),
-                 new Hitbox(16f, 4f, -8f, -3f)
-            ]);
+            Collider = new ColliderList(new Collider[]
+            {
+                new Circle(6f),
+                new Hitbox(16f, 4f, -8f, -3f)
+            });
             Visible = false;
             Add(new PlayerCollider(OnPlayer));
             Add(new HoldableCollider(OnHoldable));

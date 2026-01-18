@@ -17,16 +17,14 @@ namespace Celeste
             List<MTexture> textures)
         {
             Animation animation = new Animation
-                {
+            {
                 Name = name,
                 Delay = delay,
                 Offset = offset,
                 Origin = origin,
                 Frames = textures.ToArray()
-            } with
-            {
-                ID = Animations.Count
             };
+            animation.ID = Animations.Count;
             Animations.Add(animation);
             AnimationsByName.Add(name, animation);
         }

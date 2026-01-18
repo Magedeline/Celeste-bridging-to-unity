@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -6,6 +6,13 @@ namespace FMOD.Studio
 {
     public class EventInstance : HandleBase
     {
+        // Celeste (and some decompilers) use the older FMOD C# wrapper naming style.
+        // Provide aliases to keep upstream code compiling.
+        public RESULT setParameterValue(string name, float value) => SetParameterValueCompat(name, value);
+
+        private RESULT SetParameterValueCompat(string name, float value) =>
+            EventInstance.FMOD_Studio_EventInstance_SetParameterValue(this.rawPtr, Encoding.UTF8.GetBytes(name + "\0"), value);
+
         public RESULT getDescription(out EventDescription description)
         {
             description = (EventDescription) null;

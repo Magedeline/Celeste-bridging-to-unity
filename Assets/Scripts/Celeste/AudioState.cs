@@ -43,7 +43,7 @@ namespace Celeste
         public void Apply(bool forceSixteenthNoteHack = false)
         {
             bool flag1 = Audio.SetMusic(Music.Event, false);
-            if (Audio.CurrentMusicEventInstance != null)
+            if (Audio.CurrentMusicEventInstance.isValid())
             {
                 foreach (MEP parameter in Music.Parameters)
                 {
@@ -56,7 +56,7 @@ namespace Celeste
                 }
             }
             bool flag2 = Audio.SetAmbience(Ambience.Event, false);
-            if (!(Audio.CurrentAmbienceEventInstance != null))
+            if (!Audio.CurrentAmbienceEventInstance.isValid())
                 return;
             foreach (MEP parameter in Ambience.Parameters)
                 Audio.SetParameter(Audio.CurrentAmbienceEventInstance, parameter.Key, parameter.Value);

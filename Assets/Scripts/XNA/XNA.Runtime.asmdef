@@ -1,0 +1,14 @@
+{
+    "name": "XNA.Runtime",
+    "rootNamespace": "Microsoft.Xna.Framework",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

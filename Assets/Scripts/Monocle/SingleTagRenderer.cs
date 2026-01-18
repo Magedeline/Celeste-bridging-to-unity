@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Monocle
 {
@@ -13,8 +13,8 @@ namespace Monocle
         public SingleTagRenderer(BitTag tag)
         {
             Tag = tag;
-            BlendState = BlendState.AlphaBlend;
-            SamplerState = SamplerState.LinearClamp;
+            BlendState = Microsoft.Xna.Framework.Graphics.BlendState.AlphaBlend;
+            SamplerState = Microsoft.Xna.Framework.Graphics.SamplerState.LinearClamp;
             Camera = new Camera();
         }
 

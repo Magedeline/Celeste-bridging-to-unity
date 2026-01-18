@@ -3,8 +3,10 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+#endif
 
 namespace Monocle
 {
@@ -124,11 +126,18 @@ namespace Monocle
         {
             private HashSet<Keys> _previousKeys = new HashSet<Keys>();
             private HashSet<Keys> _currentKeys = new HashSet<Keys>();
+            #if ENABLE_INPUT_SYSTEM
             private UnityEngine.InputSystem.Keyboard _keyboard;
+            #endif
+
+// XNA compatibility: some game/UI code expects KeyboardState access.
+public KeyboardState CurrentState => Microsoft.Xna.Framework.Input.Keyboard.GetState();
 
             internal KeyboardData()
             {
+                #if ENABLE_INPUT_SYSTEM
                 _keyboard = UnityEngine.InputSystem.Keyboard.current;
+                #endif
             }
 
             internal void Update()
@@ -136,6 +145,7 @@ namespace Monocle
                 _previousKeys = new HashSet<Keys>(_currentKeys);
                 _currentKeys.Clear();
 
+                #if ENABLE_INPUT_SYSTEM
                 _keyboard = UnityEngine.InputSystem.Keyboard.current;
                 if (_keyboard == null) return;
 
@@ -154,6 +164,15 @@ namespace Monocle
                         }
                     }
                 }
+                #else
+                var legacyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+                foreach (Keys key in Enum.GetValues(typeof(Keys)))
+                {
+                    if (key == Keys.None) continue;
+                    if (legacyState.IsKeyDown(key))
+                        _currentKeys.Add(key);
+                }
+                #endif
             }
 
             internal void UpdateNull()
@@ -189,6 +208,7 @@ namespace Monocle
             /// <summary>
             /// Maps XNA Keys to Unity Input System Key.
             /// </summary>
+            #if ENABLE_INPUT_SYSTEM
             private static Key KeysToUnityKey(Keys key)
             {
                 return key switch
@@ -229,16 +249,21 @@ namespace Monocle
                     Keys.D7 => Key.Digit7,
                     Keys.D8 => Key.Digit8,
                     Keys.D9 => Key.Digit9,
-                    Keys.NumPad0 => Key.Numpad0,
-                    Keys.NumPad1 => Key.Numpad1,
-                    Keys.NumPad2 => Key.Numpad2,
-                    Keys.NumPad3 => Key.Numpad3,
-                    Keys.NumPad4 => Key.Numpad4,
-                    Keys.NumPad5 => Key.Numpad5,
-                    Keys.NumPad6 => Key.Numpad6,
-                    Keys.NumPad7 => Key.Numpad7,
-                    Keys.NumPad8 => Key.Numpad8,
-                    Keys.NumPad9 => Key.Numpad9,
+                    Keys.Escape => Key.Escape,
+                    Keys.Space => Key.Space,
+                    Keys.Enter => Key.Enter,
+                    Keys.Tab => Key.Tab,
+                    Keys.Back => Key.Backspace,
+                    Keys.Left => Key.LeftArrow,
+                    Keys.Right => Key.RightArrow,
+                    Keys.Up => Key.UpArrow,
+                    Keys.Down => Key.DownArrow,
+                    Keys.LeftShift => Key.LeftShift,
+                    Keys.RightShift => Key.RightShift,
+                    Keys.LeftControl => Key.LeftCtrl,
+                    Keys.RightControl => Key.RightCtrl,
+                    Keys.LeftAlt => Key.LeftAlt,
+                    Keys.RightAlt => Key.RightAlt,
                     Keys.F1 => Key.F1,
                     Keys.F2 => Key.F2,
                     Keys.F3 => Key.F3,
@@ -251,59 +276,22 @@ namespace Monocle
                     Keys.F10 => Key.F10,
                     Keys.F11 => Key.F11,
                     Keys.F12 => Key.F12,
-                    Keys.Up => Key.UpArrow,
-                    Keys.Down => Key.DownArrow,
-                    Keys.Left => Key.LeftArrow,
-                    Keys.Right => Key.RightArrow,
-                    Keys.Space => Key.Space,
-                    Keys.Enter => Key.Enter,
-                    Keys.Escape => Key.Escape,
-                    Keys.Tab => Key.Tab,
-                    Keys.Back => Key.Backspace,
-                    Keys.Delete => Key.Delete,
-                    Keys.Insert => Key.Insert,
-                    Keys.Home => Key.Home,
-                    Keys.End => Key.End,
-                    Keys.PageUp => Key.PageUp,
-                    Keys.PageDown => Key.PageDown,
-                    Keys.LeftShift => Key.LeftShift,
-                    Keys.RightShift => Key.RightShift,
-                    Keys.LeftControl => Key.LeftCtrl,
-                    Keys.RightControl => Key.RightCtrl,
-                    Keys.LeftAlt => Key.LeftAlt,
-                    Keys.RightAlt => Key.RightAlt,
-                    Keys.OemTilde => Key.Backquote,
-                    Keys.OemMinus => Key.Minus,
-                    Keys.OemPlus => Key.Equals,
-                    Keys.OemOpenBrackets => Key.LeftBracket,
-                    Keys.OemCloseBrackets => Key.RightBracket,
-                    Keys.OemPipe => Key.Backslash,
-                    Keys.OemSemicolon => Key.Semicolon,
-                    Keys.OemQuotes => Key.Quote,
-                    Keys.OemComma => Key.Comma,
-                    Keys.OemPeriod => Key.Period,
-                    Keys.OemQuestion => Key.Slash,
-                    Keys.CapsLock => Key.CapsLock,
-                    Keys.NumLock => Key.NumLock,
-                    Keys.Scroll => Key.ScrollLock,
-                    Keys.PrintScreen => Key.PrintScreen,
-                    Keys.Pause => Key.Pause,
-                    Keys.Add => Key.NumpadPlus,
-                    Keys.Subtract => Key.NumpadMinus,
-                    Keys.Multiply => Key.NumpadMultiply,
-                    Keys.Divide => Key.NumpadDivide,
-                    Keys.Decimal => Key.NumpadPeriod,
                     _ => Key.None
                 };
             }
+            #endif
+
         }
+
 
         /// <summary>
         /// Unity-adapted MouseData using the new Input System.
         /// </summary>
         public class MouseData
         {
+            #if ENABLE_INPUT_SYSTEM
             private UnityEngine.InputSystem.Mouse _mouse;
+            #endif
             private bool _prevLeftButton;
             private bool _prevRightButton;
             private bool _prevMiddleButton;
@@ -315,9 +303,14 @@ namespace Monocle
             private float _prevScroll;
             private float _currScroll;
 
+// XNA compatibility: some game/UI code expects MouseState access.
+public MouseState CurrentState => Microsoft.Xna.Framework.Input.Mouse.GetState();
+
             internal MouseData()
             {
+                #if ENABLE_INPUT_SYSTEM
                 _mouse = UnityEngine.InputSystem.Mouse.current;
+                #endif
             }
 
             internal void Update()
@@ -328,6 +321,7 @@ namespace Monocle
                 _prevPosition = _currPosition;
                 _prevScroll = _currScroll;
 
+                #if ENABLE_INPUT_SYSTEM
                 _mouse = UnityEngine.InputSystem.Mouse.current;
                 if (_mouse != null)
                 {
@@ -337,6 +331,14 @@ namespace Monocle
                     _currPosition = _mouse.position.ReadValue();
                     _currScroll = _mouse.scroll.ReadValue().y;
                 }
+                #else
+                var legacy = Microsoft.Xna.Framework.Input.Mouse.GetState();
+                _currLeftButton = legacy.LeftButton == ButtonState.Pressed;
+                _currRightButton = legacy.RightButton == ButtonState.Pressed;
+                _currMiddleButton = legacy.MiddleButton == ButtonState.Pressed;
+                _currPosition = new UnityEngine.Vector2(legacy.X, legacy.Y);
+                _currScroll = legacy.ScrollWheelValue;
+                #endif
             }
 
             internal void UpdateNull()
@@ -397,10 +399,12 @@ namespace Monocle
                 set
                 {
                     var transformed = Microsoft.Xna.Framework.Vector2.Transform(value, Engine.ScreenMatrix);
+                    #if ENABLE_INPUT_SYSTEM
                     if (_mouse != null)
                     {
                         _mouse.WarpCursorPosition(new UnityEngine.Vector2(transformed.X, transformed.Y));
                     }
+                    #endif
                 }
             }
         }
@@ -416,7 +420,9 @@ namespace Monocle
             private float rumbleStrength;
             private float rumbleTime;
 
+            #if ENABLE_INPUT_SYSTEM
             private UnityEngine.InputSystem.Gamepad _gamepad;
+            #endif
             
             // Previous frame state
             private bool[] _prevButtons = new bool[16];
@@ -453,6 +459,7 @@ namespace Monocle
                 PlayerIndex = (PlayerIndex)Calc.Clamp(playerIndex, 0, 3);
             }
 
+            #if ENABLE_INPUT_SYSTEM
             private UnityEngine.InputSystem.Gamepad GetGamepad()
             {
                 var gamepads = UnityEngine.InputSystem.Gamepad.all;
@@ -461,9 +468,11 @@ namespace Monocle
                     return gamepads[index];
                 return null;
             }
+            #endif
 
             public bool HasAnyInput()
             {
+                #if ENABLE_INPUT_SYSTEM
                 bool wasConnected = Attached;
                 bool isConnected = _gamepad != null;
                 
@@ -486,10 +495,14 @@ namespace Monocle
                     return true;
                     
                 return false;
+                #else
+                return false;
+                #endif
             }
 
             public void Update()
             {
+                #if ENABLE_INPUT_SYSTEM
                 // Save previous state
                 Array.Copy(_currButtons, _prevButtons, _currButtons.Length);
                 _prevLeftStick = _currLeftStick;
@@ -546,6 +559,23 @@ namespace Monocle
                         _gamepad?.SetMotorSpeeds(0f, 0f);
                     }
                 }
+                #else
+                Array.Copy(_currButtons, _prevButtons, _currButtons.Length);
+                _prevLeftStick = _currLeftStick;
+                _prevRightStick = _currRightStick;
+                _prevLeftTrigger = _currLeftTrigger;
+                _prevRightTrigger = _currRightTrigger;
+
+                Array.Clear(_currButtons, 0, _currButtons.Length);
+                _currLeftStick = UnityEngine.Vector2.zero;
+                _currRightStick = UnityEngine.Vector2.zero;
+                _currLeftTrigger = 0f;
+                _currRightTrigger = 0f;
+
+                var state = Microsoft.Xna.Framework.Input.GamePad.GetState(PlayerIndex);
+                Attached = state.IsConnected;
+                HadInputThisFrame = false;
+                #endif
             }
 
             public void UpdateNull()
@@ -562,27 +592,42 @@ namespace Monocle
                 _currLeftTrigger = 0f;
                 _currRightTrigger = 0f;
 
+                #if ENABLE_INPUT_SYSTEM
                 _gamepad = GetGamepad();
                 Attached = _gamepad != null;
 
                 if (rumbleTime > 0.0)
                     rumbleTime -= Engine.DeltaTime;
                 _gamepad?.SetMotorSpeeds(0f, 0f);
+                #else
+                Attached = false;
+                if (rumbleTime > 0.0)
+                    rumbleTime -= Engine.DeltaTime;
+                #endif
             }
 
             public void Rumble(float strength, float time)
             {
+                #if ENABLE_INPUT_SYSTEM
                 if (rumbleTime > 0.0 && strength <= rumbleStrength && (strength != rumbleStrength || time <= rumbleTime))
                     return;
                 _gamepad?.SetMotorSpeeds(strength, strength);
                 rumbleStrength = strength;
                 rumbleTime = time;
+                #else
+                rumbleStrength = strength;
+                rumbleTime = time;
+                #endif
             }
 
             public void StopRumble()
             {
+                #if ENABLE_INPUT_SYSTEM
                 _gamepad?.SetMotorSpeeds(0f, 0f);
                 rumbleTime = 0.0f;
+                #else
+                rumbleTime = 0.0f;
+                #endif
             }
 
             private int GetButtonIndex(Buttons button)

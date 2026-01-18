@@ -25,7 +25,7 @@ namespace Celeste
         {
             get
             {
-                if (instance != null)
+                if (instance.isValid())
                 {
                     PLAYBACK_STATE state;
                     int playbackState = (int) instance.getPlaybackState(out state);
@@ -65,13 +65,13 @@ namespace Celeste
             Stop();
             EventName = path;
             EventDescription eventDescription = Audio.GetEventDescription(path);
-            if (eventDescription != null)
+            if (eventDescription.isValid())
             {
                 int instance = (int) eventDescription.createInstance(out this.instance);
                 int num1 = (int) eventDescription.is3D(out is3D);
                 int num2 = (int) eventDescription.isOneshot(out isOneshot);
             }
-            if (this.instance != null)
+            if (this.instance.isValid())
             {
                 if (is3D)
                 {
@@ -92,7 +92,7 @@ namespace Celeste
 
         public SoundSource Param(string param, float value)
         {
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num = (int) instance.setParameterValue(param, value);
             }
@@ -101,7 +101,7 @@ namespace Celeste
 
         public SoundSource Pause()
         {
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num = (int) instance.setPaused(true);
             }
@@ -111,7 +111,7 @@ namespace Celeste
 
         public SoundSource Resume()
         {
-            if (instance != null)
+            if (instance.isValid())
             {
                 bool paused1;
                 int paused2 = (int) instance.getPaused(out paused1);
@@ -127,14 +127,14 @@ namespace Celeste
         public SoundSource Stop(bool allowFadeout = true)
         {
             Audio.Stop(instance, allowFadeout);
-            instance = null;
+            instance = default;
             Playing = false;
             return this;
         }
 
         public void UpdateSfxPosition()
         {
-            if (!is3D || !(instance != null))
+            if (!is3D || !instance.isValid())
                 return;
             Vector2 position = Position;
             if (Entity != null)
@@ -145,14 +145,14 @@ namespace Celeste
         public override void Update()
         {
             UpdateSfxPosition();
-            if (!isOneshot || !(instance != null))
+            if (!isOneshot || !instance.isValid())
                 return;
             PLAYBACK_STATE state;
             int playbackState = (int) instance.getPlaybackState(out state);
             if (state != PLAYBACK_STATE.STOPPED)
                 return;
             int num = (int) instance.release();
-            instance = null;
+            instance = default;
             Playing = false;
             if (!RemoveOnOneshotEnd)
                 return;
@@ -182,7 +182,7 @@ namespace Celeste
             Vector2 position = Position;
             if (Entity != null)
                 position += Entity.Position;
-            if (instance != null && Playing)
+            if (instance.isValid() && Playing)
                 Draw.Circle(position, (float) (4.0 + Scene.RawTimeActive * 2.0 % 1.0 * 16.0), Color.BlueViolet, 16);
             Draw.HollowRect(position.X - 2f, position.Y - 2f, 4f, 4f, Color.BlueViolet);
         }

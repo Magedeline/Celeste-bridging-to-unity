@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Monocle
 {
@@ -17,7 +17,7 @@ namespace Monocle
             removing = new List<Renderer>();
         }
 
-        internal void UpdateLists()
+        public void UpdateLists()
         {
             if (adding.Count > 0)
             {
@@ -33,7 +33,7 @@ namespace Monocle
             removing.Clear();
         }
 
-        internal void Update()
+        public void Update()
         {
             foreach (Renderer renderer in Renderers)
                 renderer.Update(scene);

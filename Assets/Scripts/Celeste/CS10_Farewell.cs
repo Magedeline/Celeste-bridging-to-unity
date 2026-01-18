@@ -189,7 +189,7 @@ namespace Celeste
         private void Dispose()
         {
             Audio.ReleaseSnapshot(snapshot);
-            snapshot = null;
+            snapshot = default;
         }
 
         public override void Render()

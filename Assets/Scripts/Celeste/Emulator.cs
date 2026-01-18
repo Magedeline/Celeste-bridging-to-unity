@@ -238,9 +238,9 @@ namespace Celeste.Pico8
             buffer.Dispose();
             Audio.BusStopAll("bus:/gameplay_sfx");
             Audio.Stop(bgSfx);
-            if (snapshot != null)
+            if (snapshot.isValid())
                 Audio.ReleaseSnapshot(snapshot);
-            snapshot = null;
+            snapshot = default;
             //Stats.Store();
             base.End();
         }
@@ -425,7 +425,7 @@ namespace Celeste.Pico8
                     Audio.BusStopAll("bus:/gameplay_sfx");
                     Audio.PauseGameplaySfx = false;
                     Audio.ReleaseSnapshot(snapshot);
-                    snapshot = null;
+                    snapshot = default;
                     ResetScreen();
                     game = null;
                     gameFrame = 0;
@@ -445,7 +445,7 @@ namespace Celeste.Pico8
                     Audio.PauseGameplaySfx = false;
                     Audio.ReleaseSnapshot(snapshot);
                     Audio.Stop(bgSfx);
-                    snapshot = null;
+                    snapshot = default;
                     if (ReturnTo != null)
                     {
                         if (ReturnTo is Level)
@@ -463,7 +463,7 @@ namespace Celeste.Pico8
             {
                 Audio.PauseGameplaySfx = false;
                 Audio.ReleaseSnapshot(snapshot);
-                snapshot = null;
+                snapshot = default;
                 gameDelay = 0.1f;
                 pauseMenu = null;
                 gameActive = true;

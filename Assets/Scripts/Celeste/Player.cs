@@ -1,4 +1,4 @@
-﻿using FMOD.Studio;
+using FMOD.Studio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Monocle;
@@ -475,7 +475,7 @@ namespace Celeste
             };
             Sprite.OnChange = (last, next) =>
             {
-                if (!(last == "idleB") && !(last == "idleC") || next == null || next.StartsWith("idle") || !(idleSfx != null))
+                if (!(last == "idleB") && !(last == "idleC") || next == null || next.StartsWith("idle") || !idleSfx.isValid())
                     return;
                 Audio.Stop(idleSfx);
             };
@@ -2802,11 +2802,11 @@ namespace Celeste
 
         private void ClimbEnd()
         {
-            if (conveyorLoopSfx != null)
+            if (conveyorLoopSfx.isValid())
             {
-                int num1 = (int) conveyorLoopSfx.setParameterValue("end", 1f);
-                int num2 = (int) conveyorLoopSfx.release();
-                conveyorLoopSfx = null;
+                Audio.SetParameter(conveyorLoopSfx, "end", 1f);
+                conveyorLoopSfx.release();
+                conveyorLoopSfx = default;
             }
             wallSpeedRetentionTimer = 0.0f;
             if (sweatSprite == null || !(sweatSprite.CurrentAnimationID != "jump"))
@@ -2856,7 +2856,7 @@ namespace Celeste
             if (climbNoMoveTimer <= 0.0 && wallBooster != null)
             {
                 wallBoosting = true;
-                if (conveyorLoopSfx == null)
+                if (!conveyorLoopSfx.isValid())
                     conveyorLoopSfx = Audio.Play("event:/game/09_core/conveyor_activate", Position, "end", 0.0f);
                 Audio.Position(conveyorLoopSfx, Position);
                 Speed.Y = Calc.Approach(Speed.Y, -160f, 600f * Engine.DeltaTime);
@@ -2866,11 +2866,11 @@ namespace Celeste
             else
             {
                 wallBoosting = false;
-                if (conveyorLoopSfx != null)
+                if (conveyorLoopSfx.isValid())
                 {
                     int num1 = (int) conveyorLoopSfx.setParameterValue("end", 1f);
                     int num2 = (int) conveyorLoopSfx.release();
-                    conveyorLoopSfx = null;
+                    conveyorLoopSfx = default;
                 }
                 float target = 0.0f;
                 bool flag = false;

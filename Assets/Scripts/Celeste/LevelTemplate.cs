@@ -96,19 +96,15 @@ namespace Celeste.Editor
         /// <summary>
         /// List of foreground tiles stored as horizontal rectangles. (the height will always be 1)
         /// </summary>
-        private readonly List<Rectangle> solids =
-        [
-        ];
+        private readonly List<Rectangle> solids = new List<Rectangle>();
         /// <summary>
         /// List of background tiles stored as horizontal rectangles. (the height will always be 1)
         /// </summary>
-        private readonly List<Rectangle> backs =
-        [
-        ];
+        private readonly List<Rectangle> backs = new List<Rectangle>();
 
         private static readonly Color bgTilesColor = Color.DarkSlateGray * 0.5f;
-        private static readonly Color[] fgTilesColor =
-        [
+        private static readonly Color[] fgTilesColor = new Color[]
+        {
             Color.White,                // Default white
             Calc.HexToColor("f6735e"),  // Orange
             Calc.HexToColor("85f65e"),  // Green
@@ -116,7 +112,7 @@ namespace Celeste.Editor
             Calc.HexToColor("376be3"),  // Blue
             Calc.HexToColor("c337e3"),  // Purple
             Calc.HexToColor("e33773")   // Pink
-        ];
+        };
         private static readonly Color inactiveBorderColor = Color.DarkSlateGray;
         private static readonly Color selectedBorderColor = Color.Red;
         private static readonly Color hoveredBorderColor = Color.Yellow;
@@ -179,14 +175,14 @@ namespace Celeste.Editor
                 }
             }
 
-            Spawns = [];
+            Spawns = new List<Vector2>();
             foreach (Vector2 spawn in data.Spawns)
                 Spawns.Add(spawn / 8f - new Vector2(X, Y));
 
-            Strawberries = [];
-            StrawberryMetadata = [];
-            Checkpoints = [];
-            Jumpthrus = [];
+            Strawberries = new List<Vector2>();
+            StrawberryMetadata = new List<string>();
+            Checkpoints = new List<Vector2>();
+            Jumpthrus = new List<Rectangle>();
 
             // Setup strawberries, checkpoints and jumpthrus
             foreach (EntityData entity in data.Entities)

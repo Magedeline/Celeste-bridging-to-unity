@@ -90,7 +90,7 @@ namespace Celeste
             bird.Sprite.Play("sleep");
             yield return null;
             bird = null;
-            instance = null;
+            instance = default;
             from = new Vector2();
             to = new Vector2();
             yield return 2f;

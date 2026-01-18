@@ -1,4 +1,4 @@
-﻿using FMOD;
+using FMOD;
 using FMOD.Studio;
 using Microsoft.Xna.Framework;
 using Monocle;
@@ -52,18 +52,18 @@ namespace Celeste
 
         public static void Update()
         {
-            if (!(Audio.system != null) || !Audio.ready)
+            if (!Audio.system.isValid() || !Audio.ready)
                 return;
             Audio.CheckFmod(Audio.system.update());
         }
 
         public static void Unload()
         {
-            if (!(Audio.system != null))
+            if (!Audio.system.isValid())
                 return;
             Audio.CheckFmod(Audio.system.unloadAll());
             Audio.CheckFmod(Audio.system.release());
-            Audio.system = null;
+            Audio.system = default;
         }
 
         public static void SetListenerPosition(Vector3 forward, Vector3 up, Vector3 position)
@@ -72,7 +72,7 @@ namespace Celeste
             {
                 forward = {
                     x = forward.X,
-                    z = forward.Y
+                    y = forward.Y
                 }
             };
             attributes.forward.z = forward.Z;
@@ -96,7 +96,7 @@ namespace Celeste
         public static EventInstance Play(string path)
         {
             EventInstance instance = Audio.CreateInstance(path);
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num1 = (int) instance.start();
                 int num2 = (int) instance.release();
@@ -107,7 +107,7 @@ namespace Celeste
         public static EventInstance Play(string path, string param, float value)
         {
             EventInstance instance = Audio.CreateInstance(path);
-            if (instance != null)
+            if (instance.isValid())
             {
                 Audio.SetParameter(instance, param, value);
                 int num1 = (int) instance.start();
@@ -119,7 +119,7 @@ namespace Celeste
         public static EventInstance Play(string path, Vector2 position)
         {
             EventInstance instance = Audio.CreateInstance(path, position);
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num1 = (int) instance.start();
                 int num2 = (int) instance.release();
@@ -134,7 +134,7 @@ namespace Celeste
             float value)
         {
             EventInstance instance = Audio.CreateInstance(path, position);
-            if (instance != null)
+                if (instance.isValid())
             {
                 if (param != null)
                 {
@@ -155,7 +155,7 @@ namespace Celeste
             float value2)
         {
             EventInstance instance = Audio.CreateInstance(path, position);
-            if (instance != null)
+            if (instance.isValid())
             {
                 if (param != null)
                 {
@@ -174,7 +174,7 @@ namespace Celeste
         public static EventInstance Loop(string path)
         {
             EventInstance instance = Audio.CreateInstance(path);
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num = (int) instance.start();
             }
@@ -184,7 +184,7 @@ namespace Celeste
         public static EventInstance Loop(string path, string param, float value)
         {
             EventInstance instance = Audio.CreateInstance(path);
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num1 = (int) instance.setParameterValue(param, value);
                 int num2 = (int) instance.start();
@@ -195,7 +195,7 @@ namespace Celeste
         public static EventInstance Loop(string path, Vector2 position)
         {
             EventInstance instance = Audio.CreateInstance(path, position);
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num = (int) instance.start();
             }
@@ -209,7 +209,7 @@ namespace Celeste
             float value)
         {
             EventInstance instance = Audio.CreateInstance(path, position);
-            if (instance != null)
+            if (instance.isValid())
             {
                 int num1 = (int) instance.setParameterValue(param, value);
                 int num2 = (int) instance.start();
@@ -219,21 +219,21 @@ namespace Celeste
 
         public static void Pause(EventInstance instance)
         {
-            if (!(instance != null))
+            if (!instance.isValid())
                 return;
             int num = (int) instance.setPaused(true);
         }
 
         public static void Resume(EventInstance instance)
         {
-            if (!(instance != null))
+            if (!instance.isValid())
                 return;
             int num = (int) instance.setPaused(false);
         }
 
         public static void Position(EventInstance instance, Vector2 position)
         {
-            if (!(instance != null))
+            if (!instance.isValid())
                 return;
             Vector2 vector2 = Vector2.Zero;
             if (Audio.currentCamera != null)
@@ -249,14 +249,14 @@ namespace Celeste
 
         public static void SetParameter(EventInstance instance, string param, float value)
         {
-            if (!(instance != null))
+            if (!instance.isValid())
                 return;
             int num = (int) instance.setParameterValue(param, value);
         }
 
         public static void Stop(EventInstance instance, bool allowFadeOut = true)
         {
-            if (!(instance != null))
+            if (!instance.isValid())
                 return;
             int num1 = (int) instance.stop(allowFadeOut ? STOP_MODE.ALLOWFADEOUT : STOP_MODE.IMMEDIATE);
             int num2 = (int) instance.release();
@@ -265,8 +265,8 @@ namespace Celeste
         public static EventInstance CreateInstance(string path, Vector2? position = null)
         {
             EventDescription eventDescription = Audio.GetEventDescription(path);
-            if (!(eventDescription != null))
-                return null;
+            if (!eventDescription.isValid())
+                return default;
             EventInstance instance1;
             int instance2 = (int) eventDescription.createInstance(out instance1);
             bool is3D;
@@ -278,7 +278,7 @@ namespace Celeste
 
         public static EventDescription GetEventDescription(string path)
         {
-            EventDescription _event = null;
+            EventDescription _event = default;
             if (path != null && !Audio.cachedEventDescriptions.TryGetValue(path, out _event))
             {
                 RESULT result = Audio.system.getEvent(path, out _event);
@@ -316,11 +316,11 @@ namespace Celeste
 
         public static string GetEventName(EventInstance instance)
         {
-            if (instance != null)
+            if (instance.isValid())
             {
                 EventDescription description1;
                 int description2 = (int) instance.getDescription(out description1);
-                if (description1 != null)
+                if (description1.isValid())
                 {
                     string path1 = "";
                     int path2 = (int) description1.getPath(out path1);
@@ -332,7 +332,7 @@ namespace Celeste
 
         public static bool IsPlaying(EventInstance instance)
         {
-            if (instance != null)
+            if (instance.isValid())
             {
                 PLAYBACK_STATE state;
                 int playbackState = (int) instance.getPlaybackState(out state);
@@ -346,7 +346,7 @@ namespace Celeste
         {
             bool paused1 = false;
             Bus bus;
-            if (Audio.system != null && Audio.system.getBus(path, out bus) == RESULT.OK)
+            if (Audio.system.isValid() && Audio.system.getBus(path, out bus) == RESULT.OK)
             {
                 if (pause.HasValue)
                 {
@@ -357,25 +357,25 @@ namespace Celeste
             return paused1;
         }
 
-        public static bool BusMuted(string path, bool? mute)
+        public static bool BusMuted(string path, bool? mute = null)
         {
-            bool paused1 = false;
+            bool muted = false;
             Bus bus;
-            if (Audio.system.getBus(path, out bus) == RESULT.OK)
+            if (Audio.system.isValid() && Audio.system.getBus(path, out bus) == RESULT.OK)
             {
                 if (mute.HasValue)
                 {
                     int num = (int) bus.setMute(mute.Value);
                 }
-                int paused2 = (int) bus.getPaused(out paused1);
+                int result = (int) bus.getMute(out muted);
             }
-            return paused1;
+            return muted;
         }
 
         public static void BusStopAll(string path, bool immediate = false)
         {
             Bus bus;
-            if (!(Audio.system != null) || Audio.system.getBus(path, out bus) != RESULT.OK)
+            if (!Audio.system.isValid() || Audio.system.getBus(path, out bus) != RESULT.OK)
                 return;
             int num = (int) bus.stopAllEvents(immediate ? STOP_MODE.IMMEDIATE : STOP_MODE.ALLOWFADEOUT);
         }
@@ -412,7 +412,7 @@ namespace Celeste
 
         public static void ResumeSnapshot(EventInstance snapshot)
         {
-            if (!(snapshot != null))
+            if (!snapshot.isValid())
                 return;
             int num = (int) snapshot.start();
         }
@@ -428,14 +428,14 @@ namespace Celeste
 
         public static void EndSnapshot(EventInstance snapshot)
         {
-            if (!(snapshot != null))
+            if (!snapshot.isValid())
                 return;
             int num = (int) snapshot.stop(STOP_MODE.ALLOWFADEOUT);
         }
 
         public static void ReleaseSnapshot(EventInstance snapshot)
         {
-            if (!(snapshot != null))
+            if (!snapshot.isValid())
                 return;
             int num1 = (int) snapshot.stop(STOP_MODE.ALLOWFADEOUT);
             int num2 = (int) snapshot.release();
@@ -450,14 +450,14 @@ namespace Celeste
             if (string.IsNullOrEmpty(path) || path == "null")
             {
                 Audio.Stop(Audio.currentMusicEvent, allowFadeOut);
-                Audio.currentMusicEvent = null;
+                Audio.currentMusicEvent = default;
                 Audio.CurrentMusic = "";
             }
             else if (!Audio.CurrentMusic.Equals(path, StringComparison.OrdinalIgnoreCase))
             {
                 Audio.Stop(Audio.currentMusicEvent, allowFadeOut);
                 EventInstance instance = Audio.CreateInstance(path);
-                if (instance != null & startPlaying)
+                if (instance.isValid() && startPlaying)
                 {
                     int num = (int) instance.start();
                 }
@@ -473,13 +473,13 @@ namespace Celeste
             if (string.IsNullOrEmpty(path) || path == "null")
             {
                 Audio.Stop(Audio.currentAmbientEvent);
-                Audio.currentAmbientEvent = null;
+                Audio.currentAmbientEvent = default;
             }
             else if (!Audio.GetEventName(Audio.currentAmbientEvent).Equals(path, StringComparison.OrdinalIgnoreCase))
             {
                 Audio.Stop(Audio.currentAmbientEvent);
                 EventInstance instance = Audio.CreateInstance(path);
-                if (instance != null & startPlaying)
+                if (instance.isValid() && startPlaying)
                 {
                     int num = (int) instance.start();
                 }
@@ -491,7 +491,7 @@ namespace Celeste
 
         public static void SetMusicParam(string path, float value)
         {
-            if (!(Audio.currentMusicEvent != null))
+            if (!Audio.currentMusicEvent.isValid())
                 return;
             int num = (int) Audio.currentMusicEvent.setParameterValue(path, value);
         }
@@ -502,7 +502,7 @@ namespace Celeste
             {
                 Audio.EndSnapshot(Audio.mainDownSnapshot);
                 Audio.Stop(Audio.currentAltMusicEvent);
-                Audio.currentAltMusicEvent = null;
+                Audio.currentAltMusicEvent = default;
             }
             else
             {
@@ -516,7 +516,7 @@ namespace Celeste
 
         private static void StartMainDownSnapshot()
         {
-            if (Audio.mainDownSnapshot == null)
+            if (!Audio.mainDownSnapshot.isValid())
                 Audio.mainDownSnapshot = Audio.CreateSnapshot("snapshot:/music_mains_mute");
             else
                 Audio.ResumeSnapshot(Audio.mainDownSnapshot);
@@ -575,7 +575,7 @@ namespace Celeste
                 Audio.musicUnderwater = value;
                 if (Audio.musicUnderwater)
                 {
-                    if (Audio.musicUnderwaterSnapshot == null)
+                    if (!Audio.musicUnderwaterSnapshot.isValid())
                         Audio.musicUnderwaterSnapshot = Audio.CreateSnapshot("snapshot:/underwater");
                     else
                         Audio.ResumeSnapshot(Audio.musicUnderwaterSnapshot);

@@ -47,7 +47,7 @@ namespace Celeste
 
         private WaveDashPage CurrPage => pageIndex >= pages.Count ? null : pages[pageIndex];
 
-        public WaveDashPresentation(EventInstance usingSfx = null)
+        public WaveDashPresentation(EventInstance usingSfx = default)
         {
             Tag = (int) Tags.HUD;
             Viewing = true;
@@ -110,7 +110,7 @@ namespace Celeste
                     yield return (float) (duration * 0.800000011920929);
                 }
             }
-            if (presentation.usingSfx != null)
+            if (presentation.usingSfx.isValid())
             {
                 Audio.SetParameter(presentation.usingSfx, "end", 1f);
                 int num = (int) presentation.usingSfx.release();

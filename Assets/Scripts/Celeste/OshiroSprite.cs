@@ -11,6 +11,7 @@ namespace Celeste
         private Wiggler wiggler;
 
         public OshiroSprite(int facing)
+            : base(GFX.Game, "oshiro")
         {
             Scale.X = facing;
             GFX.SpriteBank.CreateOn(this, "oshiro");
